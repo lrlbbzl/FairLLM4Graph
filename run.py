@@ -14,8 +14,6 @@ import torch.nn.functional as F
 from sklearn.metrics import roc_auc_score, accuracy_score
 from dataset import get_dataset
 from torch_geometric.utils import train_test_split_edges
-from lp_model import LPModel
-import pytorch_lightning as pl
 from gnn_model.model import GNN
 from sklearn.metrics import classification_report
 from torch.optim import Adam, AdamW
