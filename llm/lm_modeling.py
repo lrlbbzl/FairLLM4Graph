@@ -1,0 +1,92 @@
+from config import logger
+
+import logging
+import os.path as osp
+
+import torch
+import torch.nn.functional as F
+from peft import LoraConfig, PeftModel, TaskType, get_peft_config, get_peft_model
+from torch import nn
+from transformers import AutoConfig, AutoModel
+from transformers import logging as transformers_logging
+from .pooling import MaxPooling, MeanPooling
+from sklearn.metrics import precision_recall_fscore_support, accuracy_score
+from typing import Optional, Dict, Callable
+
+from transformers.trainer import EvalPrediction
+
+def lp_compute_metrics(preds: Optional[Callable[[EvalPrediction], Dict]]):
+    pred, label = preds.predictions, preds.label_ids
+    pred = pred.reshape(pred.shape[0])
+    label = label.reshape(label.shape[0])
+    pred, label = torch.from_numpy(pred), torch.from_numpy(label)
+    pred = (pred >= 0.5).long()
+    precision, recall, f1, _ = precision_recall_fscore_support(label, pred, average='binary')
+    acc = accuracy_score(label, pred)
+    return {
+        'acc': acc, 'f1' : f1
+    }
+
+
+class LinkPredHead(nn.Module):
+    def __init__(self, hidden_size, header_dropout_prob):
+        super(LinkPredHead, self).__init__()
+        self.dense = nn.Linear(hidden_size, hidden_size)
+        dropout = header_dropout_prob if header_dropout_prob is not None else header_dropout_prob
+        self.dropout = nn.Dropout(dropout)
+        self.out_proj = nn.Linear(hidden_size, 1)
+
+    def forward(self, x_i, x_j):
+        x = x_i * x_j
+        x = self.dense(x)
+        x = F.relu(x)
+        x = self.dropout(x)
+        x = self.out_proj(x)
+        return torch.sigmoid(x)
+
+
+class LP_model(nn.Module):
+    def __init__(self, args):
+        super(LP_model, self).__init__()
+        self.plm_path = args.plm_path
+        if args.pooling == 'mean':
+            self.pooling = MeanPooling()
+        elif args.pooling == 'max':
+            self.pooling = MaxPooling()
+        assert osp.exists(self.plm_path)
+        logger.info("Load model from {}".format(self.plm_path))
+
+        self.model = AutoModel.from_pretrained(self.plm_path)
+
+        if args.mode == 'ft_lm':
+            lora_config = LoraConfig(
+                task_type=TaskType.SEQ_CLS,
+                inference_mode=False,
+                r=args.peft_r,
+                lora_alpha=args.peft_lora_alpha,
+                lora_dropout=args.peft_lora_dropout
+            )
+            self.model = PeftModel(self.model, lora_config)
+            self.model.print_trainable_parameters()
+
+
+        lp_config = {
+            'hidden_size' : 768,
+            'header_dropout_prob' : 0.2
+        }
+        self.lp_head = LinkPredHead(lp_config['hidden_size'], lp_config['header_dropout_prob'])
+
+
+    def forward(self, input_ids, attention_mask, labels=None):
+        """
+        input_ids, attention_mask:
+            (bs, 2, seq_len)
+        """
+        bs, num_samples, input_size = input_ids.shape
+        input_ids, attention_mask = input_ids.view(-1, input_size), attention_mask.view(-1, input_size)
+        output = self.model(input_ids, attention_mask)
+        output = self.pooling(output.last_hidden_state, attention_mask)
+        output = output.view(bs, num_samples, -1)
+        hidden_size = output.shape[-1]
+        pred = self.lp_head(output[:, 0, :], output[:, 1, :])
+        return pred
