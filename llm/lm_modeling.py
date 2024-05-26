@@ -7,13 +7,18 @@ import torch
 import torch.nn.functional as F
 from peft import LoraConfig, PeftModel, TaskType, get_peft_config, get_peft_model
 from torch import nn
-from transformers import AutoConfig, AutoModel
+from transformers import AutoConfig, AutoModel, AutoModelForCausalLM
 from transformers import logging as transformers_logging
 from .pooling import MaxPooling, MeanPooling
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score
 from typing import Optional, Dict, Callable
 
 from transformers.trainer import EvalPrediction
+
+hidden_size_map = {
+    'bert' : 768,
+    'llama-2-7b' : 4096
+}
 
 def lp_compute_metrics(preds: Optional[Callable[[EvalPrediction], Dict]]):
     pred, label = preds.predictions, preds.label_ids
@@ -55,8 +60,13 @@ class LP_model(nn.Module):
             self.pooling = MaxPooling()
         assert osp.exists(self.plm_path)
         logger.info("Load model from {}".format(self.plm_path))
-
-        self.model = AutoModel.from_pretrained(self.plm_path)
+        
+        if args.lm_name == 'bert':
+            self.model = AutoModel.from_pretrained(args.plm_path)
+        else:
+            self.model = AutoModel.from_pretrained(args.plm_path,
+                                                              torch_dtype=torch.float16,
+                                                              device_map='auto')
 
         if args.mode == 'ft_lm':
             lora_config = LoraConfig(
@@ -71,7 +81,7 @@ class LP_model(nn.Module):
 
 
         lp_config = {
-            'hidden_size' : 768,
+            'hidden_size' : hidden_size_map[args.lm_name],
             'header_dropout_prob' : 0.2
         }
         self.lp_head = LinkPredHead(lp_config['hidden_size'], lp_config['header_dropout_prob'])

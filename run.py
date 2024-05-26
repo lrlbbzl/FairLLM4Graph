@@ -26,8 +26,13 @@ from llm.lm_trainer import InnerTrainer
 from llm.lm_modeling import LP_model
 
 from peft import PeftModel
+from utils import prediction_fairness
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
+
+seed = 42
+torch.manual_seed(seed)
+np.random.seed(seed)
 
 def run(args):
     ## prepare dataset
@@ -43,6 +48,8 @@ def run(args):
     if args.mode == 'ft_lm':
         ## Start fine-tune LLM for Graph context
         model_path = args.output_dir
+        if not osp.exists(model_path):
+            os.makedirs(model_path)
         embeds_path = osp.join(args.output_dir, 'text_embeddings_{}.pt'.format(args.use_peft))
         if not any('checkpoint' in d for d in os.listdir(model_path)):
             finetune_lm(args, g, text)
@@ -94,7 +101,8 @@ def run(args):
         if epoch % 20 == 0:
             logger.info('Epoch: {:03d}, Loss: {:.4f}, Val: {:.4f}, Test: {:.4f}'.format(epoch, loss, best_val_perf, test_perf))
 
-        
+    fairs = prediction_fairness(edge_index.cpu(), link_labels.cpu(), link_probs.cpu() >= 0.5, protected_attribute.cpu())
+    print(fairs)
 
         
 

@@ -26,21 +26,30 @@ from torch.utils.data import Dataset
 from .pooling import MeanPooling, MaxPooling
 from tqdm import tqdm
 
+from config import logger
+
 def finetune_lm(args, data, text):
     neg_edges_train = negative_sampling(
             edge_index=data.train_pos_edge_index,
             num_nodes=data.num_nodes,
             num_neg_samples=data.train_pos_edge_index.size(1) // 2
         )
+    
     ## Encode text
     t = [b for a, b in text.items()]
-    tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
+    if args.lm_name == 'bert':
+        tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
+    else:
+        tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
+        tokenizer.pad_token = tokenizer.eos_token
+        tokenizer.padding_side = 'right'
+    logger.info('Use model : {}'.format(args.lm_name))
     inputs = tokenizer(t,
-                       truncation=True, 
-                       add_special_tokens=True,
-                       max_length=256,
-                       padding='max_length',
-                       return_tensors='pt')
+                    truncation=True, 
+                    add_special_tokens=True,
+                    max_length=256,
+                    padding='max_length',
+                    return_tensors='pt',)
     train_dataset = LPDataset(inputs['input_ids'],
                               inputs['attention_mask'],
                               data.train_pos_edge_index,
@@ -60,9 +69,10 @@ def finetune_lm(args, data, text):
     #     import pdb; pdb.set_trace()
 
     training_args = TrainingArguments(
+        per_device_train_batch_size=args.sm_batch_size,
+        gradient_accumulation_steps=args.lm_batch_size // args.sm_batch_size,
         output_dir=args.output_dir,
         learning_rate=args.ft_lr,
-        per_device_train_batch_size=args.lm_batch_size,
         per_device_eval_batch_size=args.lm_batch_size,
         num_train_epochs=args.lm_epochs,
         weight_decay=0.01,
@@ -82,16 +92,16 @@ def finetune_lm(args, data, text):
         compute_metrics=lp_compute_metrics
     )
     trainer.train()
-    import pdb; pdb.set_trace()
     lm = model.model
-    lm.save_pretrained(osp(args.output_dir, 'save_model'))
+    lm.save_pretrained(osp.join(args.output_dir, 'save_model'))
+
 
 
 
 
 def merge_modeling(args, g, text):
-    lm = AutoModel.from_pretrained(args.plm_path).cuda()
-    peft_model = PeftModel.from_pretrained(lm, osp.join(args.output_dir))
+    lm = AutoModel.from_pretrained(args.plm_path, device_map='auto')
+    peft_model = PeftModel.from_pretrained(lm, osp.join(args.output_dir, 'save_model'))
     if args.use_peft:
         model = peft_model.model
     else:
