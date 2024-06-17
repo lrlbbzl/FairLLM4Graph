@@ -65,8 +65,8 @@ class LP_model(nn.Module):
             self.model = AutoModel.from_pretrained(args.plm_path)
         else:
             self.model = AutoModel.from_pretrained(args.plm_path,
-                                                              torch_dtype=torch.float16,
-                                                              device_map='auto')
+                                                torch_dtype=torch.float16,
+                                                device_map='auto')
 
         if args.mode == 'ft_lm':
             lora_config = LoraConfig(

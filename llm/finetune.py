@@ -107,15 +107,20 @@ def merge_modeling(args, g, text):
     else:
         model = lm
     t = [b for a, b in text.items()]
-    tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
+    if args.lm_name == 'bert':
+        tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
+    else:
+        tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
+        tokenizer.pad_token = tokenizer.eos_token
+        tokenizer.padding_side = 'right'
     inputs = tokenizer(t,
                     truncation=True, 
                     add_special_tokens=True,
-                    max_length=512,
+                    max_length=256,
                     padding='max_length',
                     return_tensors='pt')
     encode_data = EncodeDataset(inputs['input_ids'], inputs['attention_mask'])
-    data_loader = DataLoader(encode_data, batch_size=64, shuffle=False, num_workers=4)
+    data_loader = DataLoader(encode_data, batch_size=8, shuffle=False, num_workers=4)
     if args.pooling == 'mean':
         pooler = MeanPooling()
     elif args.pooling == 'max':

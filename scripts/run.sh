@@ -1,3 +1,3 @@
-export CUDA_VISIBLE_DEVICES=2,3
+export CUDA_VISIBLE_DEVICES=0
 wandb offline
-python main.py --conv-name gcn
+python main.py --conv-name gcn --mode ft_lm
