@@ -37,13 +37,13 @@ def finetune_lm(args, data, text):
     
     ## Encode text
     t = [b for a, b in text.items()]
-    if args.lm_name == 'bert':
+    if args.plm_name == 'bert-base-uncased':
         tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
     else:
         tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
         tokenizer.pad_token = tokenizer.eos_token
         tokenizer.padding_side = 'right'
-    logger.info('Use model : {}'.format(args.lm_name))
+    logger.info('Use model : {}'.format(args.plm_name))
     inputs = tokenizer(t,
                     truncation=True, 
                     add_special_tokens=True,
@@ -71,14 +71,15 @@ def finetune_lm(args, data, text):
     training_args = TrainingArguments(
         per_device_train_batch_size=args.sm_batch_size,
         gradient_accumulation_steps=args.lm_batch_size // args.sm_batch_size,
-        output_dir=args.output_dir,
+        output_dir=args.model_path,
         learning_rate=args.ft_lr,
         per_device_eval_batch_size=args.lm_batch_size,
         num_train_epochs=args.lm_epochs,
         weight_decay=0.01,
         evaluation_strategy="steps",
         save_strategy="steps",
-        eval_steps=500,
+        save_steps=args.eval_steps,
+        eval_steps=args.eval_steps,
         load_best_model_at_end=True,
         remove_unused_columns=False,
         logging_dir='./train.log',
@@ -93,26 +94,24 @@ def finetune_lm(args, data, text):
     )
     trainer.train()
     lm = model.model
-    lm.save_pretrained(osp.join(args.output_dir, 'save_model'))
-
-
-
+    lm.save_pretrained(osp.join(args.model_path, 'save_model'))
 
 
 def merge_modeling(args, g, text):
-    lm = AutoModel.from_pretrained(args.plm_path, device_map='auto')
-    peft_model = PeftModel.from_pretrained(lm, osp.join(args.output_dir, 'save_model'))
+    if args.plm_name == 'bert-base-uncased':
+        lm = AutoModel.from_pretrained(args.plm_path)
+        tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
+    else:
+        lm = AutoModel.from_pretrained(args.plm_path, device_map='auto')
+        tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
+        tokenizer.pad_token = tokenizer.eos_token
+        tokenizer.padding_side = 'right'
+    peft_model = PeftModel.from_pretrained(lm, osp.join(args.model_path, 'save_model'))
     if args.use_peft:
         model = peft_model.model
     else:
         model = lm
     t = [b for a, b in text.items()]
-    if args.lm_name == 'bert':
-        tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
-    else:
-        tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
-        tokenizer.pad_token = tokenizer.eos_token
-        tokenizer.padding_side = 'right'
     inputs = tokenizer(t,
                     truncation=True, 
                     add_special_tokens=True,
@@ -120,12 +119,13 @@ def merge_modeling(args, g, text):
                     padding='max_length',
                     return_tensors='pt')
     encode_data = EncodeDataset(inputs['input_ids'], inputs['attention_mask'])
-    data_loader = DataLoader(encode_data, batch_size=8, shuffle=False, num_workers=4)
+    data_loader = DataLoader(encode_data, batch_size=32, shuffle=False, num_workers=4)
     if args.pooling == 'mean':
         pooler = MeanPooling()
     elif args.pooling == 'max':
         pooler = MaxPooling()
     res = []
+    logger.info("Get Embedding. Total time: {}".format(len(encode_data) / 32))
     for step, data in tqdm(enumerate(data_loader)):
         input_ids, attention_mask = data['input_ids'].to(lm.device), data['attention_mask'].to(lm.device)
         outputs = model(input_ids, attention_mask)

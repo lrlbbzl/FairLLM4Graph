@@ -16,8 +16,8 @@ from typing import Optional, Dict, Callable
 from transformers.trainer import EvalPrediction
 
 hidden_size_map = {
-    'bert' : 768,
-    'llama-2-7b' : 4096
+    'bert-base-uncased' : 768,
+    'Llama-2-7b-ms' : 4096
 }
 
 def lp_compute_metrics(preds: Optional[Callable[[EvalPrediction], Dict]]):
@@ -61,11 +61,11 @@ class LP_model(nn.Module):
         assert osp.exists(self.plm_path)
         logger.info("Load model from {}".format(self.plm_path))
         
-        if args.lm_name == 'bert':
+        if args.plm_name == 'bert-base-uncased':
             self.model = AutoModel.from_pretrained(args.plm_path)
         else:
             self.model = AutoModel.from_pretrained(args.plm_path,
-                                                torch_dtype=torch.float16,
+                                                torch_dtype=torch.bfloat16,
                                                 device_map='auto')
 
         if args.mode == 'ft_lm':
@@ -81,10 +81,11 @@ class LP_model(nn.Module):
 
 
         lp_config = {
-            'hidden_size' : hidden_size_map[args.lm_name],
+            'hidden_size' : hidden_size_map[args.plm_name],
             'header_dropout_prob' : 0.2
         }
         self.lp_head = LinkPredHead(lp_config['hidden_size'], lp_config['header_dropout_prob'])
+        self.nm = 0
 
 
     def forward(self, input_ids, attention_mask, labels=None):

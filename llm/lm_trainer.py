@@ -16,6 +16,7 @@ from transformers import EarlyStoppingCallback
 from transformers import Trainer as HugTrainer
 from transformers import TrainingArguments
 
+
 class InnerTrainer(HugTrainer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -23,7 +24,6 @@ class InnerTrainer(HugTrainer):
     def compute_loss(self, model, inputs, return_outputs=False):
         labels = inputs.pop("labels")
         input_ids, attention_mask = inputs.pop("input_ids"), inputs.pop("attention_mask")
-        
         pred = model(input_ids, attention_mask)
         pred = pred.squeeze(-1)
         loss = F.binary_cross_entropy(pred, labels)
