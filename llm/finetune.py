@@ -32,7 +32,7 @@ def finetune_lm(args, data, text):
     neg_edges_train = negative_sampling(
             edge_index=data.train_pos_edge_index,
             num_nodes=data.num_nodes,
-            num_neg_samples=data.train_pos_edge_index.size(1) // 2
+            num_neg_samples=data.train_pos_edge_index.size(1)
         )
     
     ## Encode text
@@ -119,13 +119,13 @@ def merge_modeling(args, g, text):
                     padding='max_length',
                     return_tensors='pt')
     encode_data = EncodeDataset(inputs['input_ids'], inputs['attention_mask'])
-    data_loader = DataLoader(encode_data, batch_size=32, shuffle=False, num_workers=4)
+    data_loader = DataLoader(encode_data, batch_size=args.infer_batch_size, shuffle=False, num_workers=4)
     if args.pooling == 'mean':
         pooler = MeanPooling()
     elif args.pooling == 'max':
         pooler = MaxPooling()
     res = []
-    logger.info("Get Embedding. Total time: {}".format(len(encode_data) / 32))
+    logger.info("Get Embedding. Total time: {}".format(len(encode_data) / args.infer_batch_size))
     for step, data in tqdm(enumerate(data_loader)):
         input_ids, attention_mask = data['input_ids'].to(lm.device), data['attention_mask'].to(lm.device)
         outputs = model(input_ids, attention_mask)
