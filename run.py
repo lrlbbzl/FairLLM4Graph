@@ -77,7 +77,7 @@ def run(args):
             if not osp.exists(args.model_path):
                 os.makedirs(args.model_path)
             embeds_path = osp.join(args.model_path, 'text_embeddings_{}.pt'.format(args.use_peft))
-            if not any('checkpoint' in d for d in os.listdir(args.model_path)):
+            if not any('save_model' in d for d in os.listdir(args.model_path)):
                 finetune_lm(args, g, text)
             if not osp.exists(embeds_path):
                 text_embeddings = merge_modeling(args, g, text)
@@ -97,7 +97,6 @@ def run(args):
                 num_nodes=N,
                 num_neg_samples=data.train_pos_edge_index.size(1) // 2
             ).to(device)
-            import pdb; pdb.set_trace()
             data.x = data.x.to(device)
             model.train()
             optimizer.zero_grad()
@@ -138,18 +137,21 @@ def run(args):
         cut = [0.50]
         best_acc = 0
         best_cut = 0.5
-        import pdb; pdb.set_trace()
         for i in cut:
             pred = link_probs.cpu() >= i
             acc = accuracy_score(link_labels.cpu(), pred)
             inter_pred_true, intra_pred_true = sum(inter_and_intra * pred) / sum(inter_and_intra), (sum(pred) - sum(inter_and_intra * pred)) / (inter_and_intra.size(0) - sum(inter_and_intra))
             logger.info("Predict 1 from inter relation: {}, intra relation: {}".format(inter_pred_true, intra_pred_true))
-            
-            inter_pred, inter_label = pred[inter_and_intra], link_labels.cpu()[inter_and_intra]
-            reverse = 1 - inter_and_intra
-            intra_pred, intra_label = pred[reverse], link_labels.cpu()[reverse]
+            inter_pos, intra_pos = torch.where(inter_and_intra == 1)[0], torch.where(inter_and_intra == 0)[0]
+            inter_pred, inter_label = pred[inter_pos], link_labels.cpu()[inter_pos]
+            intra_pred, intra_label = pred[intra_pos], link_labels.cpu()[intra_pos]
             inter_acc, intra_acc = accuracy_score(inter_label, inter_pred), accuracy_score(intra_label, intra_pred)
-            logger.info("Intra relation accuracy: {}, inter relation accuracy: {}.".format(intra_acc, inter_acc))
+            logger.info("Inter relation accuracy: {}, intra relation accuracy: {}.".format(inter_acc, intra_acc))
+
+            logger.info("Inter relation:")
+            logger.info("\n{}".format(classification_report(inter_label, inter_pred)))
+            logger.info("Intra relation:")
+            logger.info("\n{}".format(classification_report(intra_label, intra_pred)))
 
             if acc > best_acc:
                 best_acc = acc
