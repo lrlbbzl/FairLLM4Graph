@@ -132,3 +132,40 @@ def merge_modeling(args, g, text):
         outputs = pooler(outputs.last_hidden_state, attention_mask)
         res.append(outputs)
     return torch.cat(res, dim=0)
+
+
+def merge_modeling(args, g, text):
+    if args.plm_name == 'bert-base-uncased':
+        lm = AutoModel.from_pretrained(args.plm_path)
+        tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
+    else:
+        lm = AutoModel.from_pretrained(args.plm_path, device_map='auto')
+        tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
+        tokenizer.pad_token = tokenizer.eos_token
+        tokenizer.padding_side = 'right'
+    if args.use_peft:
+        peft_model = PeftModel.from_pretrained(lm, osp.join(args.model_path, 'save_model'))
+        model = peft_model.model
+    else:
+        model = lm
+    t = [b for a, b in text.items()]
+    inputs = tokenizer(t,
+                    truncation=True, 
+                    add_special_tokens=True,
+                    max_length=256,
+                    padding='max_length',
+                    return_tensors='pt')
+    encode_data = EncodeDataset(inputs['input_ids'], inputs['attention_mask'])
+    data_loader = DataLoader(encode_data, batch_size=args.infer_batch_size, shuffle=False, num_workers=4)
+    if args.pooling == 'mean':
+        pooler = MeanPooling()
+    elif args.pooling == 'max':
+        pooler = MaxPooling()
+    res = []
+    logger.info("Get Embedding. Total time: {}".format(len(encode_data) / args.infer_batch_size))
+    for step, data in tqdm(enumerate(data_loader)):
+        input_ids, attention_mask = data['input_ids'].to(lm.device), data['attention_mask'].to(lm.device)
+        outputs = model(input_ids, attention_mask)
+        outputs = pooler(outputs.last_hidden_state, attention_mask)
+        res.append(outputs)
+    return torch.cat(res, dim=0)
