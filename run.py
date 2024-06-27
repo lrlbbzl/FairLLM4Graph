@@ -77,7 +77,8 @@ def run(args):
             if not osp.exists(args.model_path):
                 os.makedirs(args.model_path)
             embeds_path = osp.join(args.model_path, 'text_embeddings_{}.pt'.format(args.use_peft))
-            if not any('save_model' in d for d in os.listdir(args.model_path)):
+            logger.info("Use peft: {}".format(args.use_peft))
+            if args.use_peft and (not any('save_model' in d for d in os.listdir(args.model_path))):
                 finetune_lm(args, g, text)
             if not osp.exists(embeds_path):
                 text_embeddings = merge_modeling(args, g, text)
@@ -85,6 +86,15 @@ def run(args):
             text_embeddings = torch.load(embeds_path)
             args.in_dim = text_embeddings.size(1)
             data.x = text_embeddings
+        # elif args.mode == 'only_lm':
+        #     embeds_path = osp.join(osp.join(args.input_dir, args.dataset), 'text_embedding_{}.pt'.format(args.plm_name))
+        #     if not osp.exists(embeds_path):
+        #         text_embeddings = generate_embedding(args, g, text)
+        #         torch.save(text_embeddings, embeds_path)
+        #     text_embeddings = torch.load(embeds_path)
+        #     args.in_dim = text_embeddings.size(1)
+        #     data.x = text_embeddings
+            
         model = GNN(args.in_dim, args.out_dim, args.n_heads, args.n_layers, args.dropout, args.conv_name).to(device)
         optimizer = Adam(model.parameters(), lr=args.lr)
 

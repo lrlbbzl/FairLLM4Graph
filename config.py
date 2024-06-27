@@ -21,18 +21,19 @@ parser.add_argument('--mode', type=str, default='ft_lm', choices=['gnn', 'ft_lm'
 parser.add_argument('--output-dir', type=str, default='./checkpoints')
 
 # lm config
-parser.add_argument('--plm-path', type=str, default='/root/autodl-tmp/models/modelscope/Llama-2-7b-ms')
+parser.add_argument('--plm-path', type=str, default='/home/lrl23/PReSA/plms/bert-base-uncased')
 parser.add_argument('--plm-finetune', action='store_true')
 parser.add_argument('--pooling', type=str, default='mean', choices=['max', 'mean'])
 parser.add_argument('--lm-batch-size', type=int, default=8)
 parser.add_argument('--lm-epochs', type=int, default=2)
 parser.add_argument('--sm-batch-size', type=int, default=2)
+parser.add_argument('--infer-batch-size', type=int, default=32)
 parser.add_argument('--ft-lr', type=float, default=1e-4)
 # peft config
 parser.add_argument('--peft-r', type=int, default=8)
 parser.add_argument('--peft-lora-alpha', type=int, default=8)
 parser.add_argument('--peft-lora-dropout', type=float, default=0.2)
-parser.add_argument('--use-peft', type=bool, default=True)
+parser.add_argument('--use-peft', action='store_true')
 parser.add_argument('--eval-steps', type=int, default=2000)
 
 args = parser.parse_args()
