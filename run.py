@@ -144,9 +144,12 @@ def run(args):
             if epoch % 20 == 0:
                 logger.info('Epoch: {:03d}, Loss: {:.4f}, Val: {:.4f}, Test: {:.4f}'.format(epoch, loss, best_val_perf, test_perf))
         auc = test_perf
-        cut = [0.50]
+        cut = [0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75]
+        # cut = [0.50]
         best_acc = 0
         best_cut = 0.5
+        inter_acc, intra_acc = 0, 0
+        inter_report, intra_report = None, None
         for i in cut:
             pred = link_probs.cpu() >= i
             acc = accuracy_score(link_labels.cpu(), pred)
@@ -155,17 +158,20 @@ def run(args):
             inter_pos, intra_pos = torch.where(inter_and_intra == 1)[0], torch.where(inter_and_intra == 0)[0]
             inter_pred, inter_label = pred[inter_pos], link_labels.cpu()[inter_pos]
             intra_pred, intra_label = pred[intra_pos], link_labels.cpu()[intra_pos]
-            inter_acc, intra_acc = accuracy_score(inter_label, inter_pred), accuracy_score(intra_label, intra_pred)
-            logger.info("Inter relation accuracy: {}, intra relation accuracy: {}.".format(inter_acc, intra_acc))
-
-            logger.info("Inter relation:")
-            logger.info("\n{}".format(classification_report(inter_label, inter_pred)))
-            logger.info("Intra relation:")
-            logger.info("\n{}".format(classification_report(intra_label, intra_pred)))
-
+            logger.info("Cut: {}, Acc: {}".format(i, acc))
             if acc > best_acc:
                 best_acc = acc
                 best_cut = i
+                inter_acc, intra_acc = accuracy_score(inter_label, inter_pred), accuracy_score(intra_label, intra_pred)
+                inter_report, intra_report = classification_report(inter_label, inter_pred), classification_report(intra_label, intra_pred)
+        
+        logger.info("Inter relation accuracy: {}, intra relation accuracy: {}.".format(inter_acc, intra_acc))
+
+        logger.info("Inter relation:")
+        logger.info("\n{}".format(inter_report))
+        logger.info("Intra relation:")
+        logger.info("\n{}".format(intra_report))
+
         f = prediction_fairness(
             edge_idx.cpu(), link_labels.cpu(), link_probs.cpu() >= best_cut, protected_attribute.cpu()
         )

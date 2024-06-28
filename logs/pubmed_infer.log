@@ -1,0 +1,661 @@
+nohup: ignoring input
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+2024-06-28 15:59:41,686 - datasets - INFO - PyTorch version 2.1.2+cu121 available.
+2024-06-28 15:59:44,579 - config - INFO - Round: 1
+2024-06-28 15:59:51,495 - config - INFO - Mode: ft_lm
+2024-06-28 15:59:51,495 - config - INFO - Use peft: True
+2024-06-28 15:59:53,184 - config - INFO - Epoch: 020, Loss: 0.5118, Val: 0.8387, Test: 0.8387
+2024-06-28 15:59:54,376 - config - INFO - Epoch: 040, Loss: 0.4134, Val: 0.8387, Test: 0.8387
+2024-06-28 15:59:55,566 - config - INFO - Epoch: 060, Loss: 0.4029, Val: 0.8387, Test: 0.8387
+2024-06-28 15:59:56,754 - config - INFO - Epoch: 080, Loss: 0.3969, Val: 0.8387, Test: 0.8387
+2024-06-28 15:59:57,946 - config - INFO - Epoch: 100, Loss: 0.3971, Val: 0.8387, Test: 0.8387
+2024-06-28 15:59:59,144 - config - INFO - Epoch: 120, Loss: 0.3940, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:00,344 - config - INFO - Epoch: 140, Loss: 0.3910, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:01,533 - config - INFO - Epoch: 160, Loss: 0.3904, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:02,720 - config - INFO - Epoch: 180, Loss: 0.3889, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:03,903 - config - INFO - Epoch: 200, Loss: 0.3849, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:05,087 - config - INFO - Epoch: 220, Loss: 0.3850, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:06,274 - config - INFO - Epoch: 240, Loss: 0.3850, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:07,457 - config - INFO - Epoch: 260, Loss: 0.3828, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:08,641 - config - INFO - Epoch: 280, Loss: 0.3784, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:09,829 - config - INFO - Epoch: 300, Loss: 0.3799, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:11,010 - config - INFO - Epoch: 320, Loss: 0.3730, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:12,199 - config - INFO - Epoch: 340, Loss: 0.3758, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:13,387 - config - INFO - Epoch: 360, Loss: 0.3719, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:14,581 - config - INFO - Epoch: 380, Loss: 0.3740, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:15,768 - config - INFO - Epoch: 400, Loss: 0.3714, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:16,956 - config - INFO - Epoch: 420, Loss: 0.3676, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:18,145 - config - INFO - Epoch: 440, Loss: 0.3677, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:19,371 - config - INFO - Epoch: 460, Loss: 0.3669, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:20,594 - config - INFO - Epoch: 480, Loss: 0.3647, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:21,822 - config - INFO - Epoch: 500, Loss: 0.3635, Val: 0.8387, Test: 0.8387
+2024-06-28 16:00:22,137 - config - INFO - Predict 1 from inter relation: 0.7531036734580994, intra relation: 0.7959913015365601
+2024-06-28 16:00:22,138 - config - INFO - Cut: 0.45, Acc: 0.5242030696576151
+2024-06-28 16:00:22,330 - config - INFO - Predict 1 from inter relation: 0.6074488759040833, intra relation: 0.690795361995697
+2024-06-28 16:00:22,330 - config - INFO - Cut: 0.5, Acc: 0.5660419126328218
+2024-06-28 16:00:22,683 - config - INFO - Predict 1 from inter relation: 0.417205810546875, intra relation: 0.5441082715988159
+2024-06-28 16:00:22,684 - config - INFO - Cut: 0.55, Acc: 0.6080283353010626
+2024-06-28 16:00:22,886 - config - INFO - Predict 1 from inter relation: 0.2799440324306488, intra relation: 0.39448487758636475
+2024-06-28 16:00:22,887 - config - INFO - Cut: 0.6, Acc: 0.6089876033057852
+2024-06-28 16:00:23,090 - config - INFO - Predict 1 from inter relation: 0.1830739676952362, intra relation: 0.267330527305603
+2024-06-28 16:00:23,091 - config - INFO - Cut: 0.65, Acc: 0.5844893742621016
+2024-06-28 16:00:23,414 - config - INFO - Predict 1 from inter relation: 0.12204930931329727, intra relation: 0.17694370448589325
+2024-06-28 16:00:23,415 - config - INFO - Cut: 0.7, Acc: 0.5565230224321134
+2024-06-28 16:00:23,578 - config - INFO - Predict 1 from inter relation: 0.080083929002285, intra relation: 0.11783479899168015
+2024-06-28 16:00:23,579 - config - INFO - Cut: 0.75, Acc: 0.5388872491145218
+2024-06-28 16:00:23,579 - config - INFO - Inter relation accuracy: 0.6817625458996328, intra relation accuracy: 0.5558534405719392.
+2024-06-28 16:00:23,579 - config - INFO - Inter relation:
+2024-06-28 16:00:23,579 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.81      0.76      0.79      4384
+         1.0       0.35      0.42      0.38      1335
+
+    accuracy                           0.68      5719
+   macro avg       0.58      0.59      0.58      5719
+weighted avg       0.70      0.68      0.69      5719
+
+2024-06-28 16:00:23,579 - config - INFO - Intra relation:
+2024-06-28 16:00:23,579 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.39      0.76      0.51      2392
+         1.0       0.82      0.46      0.59      5441
+
+    accuracy                           0.56      7833
+   macro avg       0.60      0.61      0.55      7833
+weighted avg       0.69      0.56      0.57      7833
+
+2024-06-28 16:00:24,410 - config - INFO - Round: 2
+2024-06-28 16:00:31,089 - config - INFO - Mode: ft_lm
+2024-06-28 16:00:31,089 - config - INFO - Use peft: True
+2024-06-28 16:00:32,330 - config - INFO - Epoch: 020, Loss: 0.4972, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:33,528 - config - INFO - Epoch: 040, Loss: 0.4142, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:34,732 - config - INFO - Epoch: 060, Loss: 0.4036, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:35,929 - config - INFO - Epoch: 080, Loss: 0.3973, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:37,123 - config - INFO - Epoch: 100, Loss: 0.3963, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:38,314 - config - INFO - Epoch: 120, Loss: 0.3946, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:39,514 - config - INFO - Epoch: 140, Loss: 0.3921, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:40,710 - config - INFO - Epoch: 160, Loss: 0.3888, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:41,907 - config - INFO - Epoch: 180, Loss: 0.3871, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:43,110 - config - INFO - Epoch: 200, Loss: 0.3870, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:44,308 - config - INFO - Epoch: 220, Loss: 0.3845, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:45,500 - config - INFO - Epoch: 240, Loss: 0.3836, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:46,696 - config - INFO - Epoch: 260, Loss: 0.3814, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:47,899 - config - INFO - Epoch: 280, Loss: 0.3787, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:49,114 - config - INFO - Epoch: 300, Loss: 0.3773, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:50,311 - config - INFO - Epoch: 320, Loss: 0.3744, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:51,508 - config - INFO - Epoch: 340, Loss: 0.3750, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:52,702 - config - INFO - Epoch: 360, Loss: 0.3746, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:53,896 - config - INFO - Epoch: 380, Loss: 0.3711, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:55,093 - config - INFO - Epoch: 400, Loss: 0.3712, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:56,292 - config - INFO - Epoch: 420, Loss: 0.3690, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:57,493 - config - INFO - Epoch: 440, Loss: 0.3662, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:58,688 - config - INFO - Epoch: 460, Loss: 0.3643, Val: 0.8335, Test: 0.8359
+2024-06-28 16:00:59,887 - config - INFO - Epoch: 480, Loss: 0.3626, Val: 0.8335, Test: 0.8359
+2024-06-28 16:01:01,086 - config - INFO - Epoch: 500, Loss: 0.3583, Val: 0.8335, Test: 0.8359
+2024-06-28 16:01:01,401 - config - INFO - Predict 1 from inter relation: 0.7625021934509277, intra relation: 0.7877895832061768
+2024-06-28 16:01:01,404 - config - INFO - Cut: 0.45, Acc: 0.5219155844155844
+2024-06-28 16:01:01,593 - config - INFO - Predict 1 from inter relation: 0.6227566003799438, intra relation: 0.6789965629577637
+2024-06-28 16:01:01,594 - config - INFO - Cut: 0.5, Acc: 0.5635330578512396
+2024-06-28 16:01:01,937 - config - INFO - Predict 1 from inter relation: 0.43648719787597656, intra relation: 0.5270702838897705
+2024-06-28 16:01:01,938 - config - INFO - Cut: 0.55, Acc: 0.6027892561983471
+2024-06-28 16:01:02,138 - config - INFO - Predict 1 from inter relation: 0.28733229637145996, intra relation: 0.38627928495407104
+2024-06-28 16:01:02,138 - config - INFO - Cut: 0.6, Acc: 0.6041174734356553
+2024-06-28 16:01:02,493 - config - INFO - Predict 1 from inter relation: 0.18644362688064575, intra relation: 0.25867143273353577
+2024-06-28 16:01:02,494 - config - INFO - Cut: 0.65, Acc: 0.5819805194805194
+2024-06-28 16:01:02,654 - config - INFO - Predict 1 from inter relation: 0.11813905090093613, intra relation: 0.17125304043293
+2024-06-28 16:01:02,655 - config - INFO - Cut: 0.7, Acc: 0.5574085005903188
+2024-06-28 16:01:02,815 - config - INFO - Predict 1 from inter relation: 0.07684265822172165, intra relation: 0.10853705555200577
+2024-06-28 16:01:02,815 - config - INFO - Cut: 0.75, Acc: 0.5385920897284534
+2024-06-28 16:01:02,815 - config - INFO - Inter relation accuracy: 0.6745077539641052, intra relation accuracy: 0.5524126455906821.
+2024-06-28 16:01:02,816 - config - INFO - Inter relation:
+2024-06-28 16:01:02,816 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.81      0.75      0.78      4384
+         1.0       0.34      0.42      0.38      1355
+
+    accuracy                           0.67      5739
+   macro avg       0.58      0.59      0.58      5739
+weighted avg       0.70      0.67      0.68      5739
+
+2024-06-28 16:01:02,816 - config - INFO - Intra relation:
+2024-06-28 16:01:02,816 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.38      0.77      0.51      2392
+         1.0       0.82      0.46      0.59      5421
+
+    accuracy                           0.55      7813
+   macro avg       0.60      0.61      0.55      7813
+weighted avg       0.69      0.55      0.56      7813
+
+2024-06-28 16:01:03,749 - config - INFO - Round: 3
+2024-06-28 16:01:10,388 - config - INFO - Mode: ft_lm
+2024-06-28 16:01:10,388 - config - INFO - Use peft: True
+2024-06-28 16:01:11,632 - config - INFO - Epoch: 020, Loss: 0.4862, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:12,832 - config - INFO - Epoch: 040, Loss: 0.4141, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:14,037 - config - INFO - Epoch: 060, Loss: 0.4039, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:15,241 - config - INFO - Epoch: 080, Loss: 0.3963, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:16,448 - config - INFO - Epoch: 100, Loss: 0.3956, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:17,652 - config - INFO - Epoch: 120, Loss: 0.3906, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:18,852 - config - INFO - Epoch: 140, Loss: 0.3917, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:20,055 - config - INFO - Epoch: 160, Loss: 0.3860, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:21,260 - config - INFO - Epoch: 180, Loss: 0.3854, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:22,487 - config - INFO - Epoch: 200, Loss: 0.3829, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:23,712 - config - INFO - Epoch: 220, Loss: 0.3811, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:24,905 - config - INFO - Epoch: 240, Loss: 0.3826, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:26,138 - config - INFO - Epoch: 260, Loss: 0.3802, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:27,345 - config - INFO - Epoch: 280, Loss: 0.3814, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:28,544 - config - INFO - Epoch: 300, Loss: 0.3760, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:29,745 - config - INFO - Epoch: 320, Loss: 0.3750, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:30,964 - config - INFO - Epoch: 340, Loss: 0.3728, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:32,172 - config - INFO - Epoch: 360, Loss: 0.3719, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:33,392 - config - INFO - Epoch: 380, Loss: 0.3687, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:34,627 - config - INFO - Epoch: 400, Loss: 0.3679, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:35,848 - config - INFO - Epoch: 420, Loss: 0.3649, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:37,069 - config - INFO - Epoch: 440, Loss: 0.3655, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:38,275 - config - INFO - Epoch: 460, Loss: 0.3646, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:39,494 - config - INFO - Epoch: 480, Loss: 0.3629, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:40,701 - config - INFO - Epoch: 500, Loss: 0.3601, Val: 0.8383, Test: 0.8297
+2024-06-28 16:01:40,862 - config - INFO - Predict 1 from inter relation: 0.756517231464386, intra relation: 0.7863554954528809
+2024-06-28 16:01:40,863 - config - INFO - Cut: 0.45, Acc: 0.5247195985832349
+2024-06-28 16:01:41,209 - config - INFO - Predict 1 from inter relation: 0.6013208031654358, intra relation: 0.6794049739837646
+2024-06-28 16:01:41,210 - config - INFO - Cut: 0.5, Acc: 0.5696576151121606
+2024-06-28 16:01:41,413 - config - INFO - Predict 1 from inter relation: 0.4113660156726837, intra relation: 0.5278276205062866
+2024-06-28 16:01:41,413 - config - INFO - Cut: 0.55, Acc: 0.6091351829988194
+2024-06-28 16:01:41,615 - config - INFO - Predict 1 from inter relation: 0.2638164758682251, intra relation: 0.389202356338501
+2024-06-28 16:01:41,616 - config - INFO - Cut: 0.6, Acc: 0.6148907910271547
+2024-06-28 16:01:41,977 - config - INFO - Predict 1 from inter relation: 0.1697949320077896, intra relation: 0.2650679647922516
+2024-06-28 16:01:41,977 - config - INFO - Cut: 0.65, Acc: 0.5886953955135773
+2024-06-28 16:01:42,139 - config - INFO - Predict 1 from inter relation: 0.10757733881473541, intra relation: 0.16965888440608978
+2024-06-28 16:01:42,139 - config - INFO - Cut: 0.7, Acc: 0.5577036599763873
+2024-06-28 16:01:42,463 - config - INFO - Predict 1 from inter relation: 0.07264511287212372, intra relation: 0.11156706511974335
+2024-06-28 16:01:42,464 - config - INFO - Cut: 0.75, Acc: 0.5360094451003542
+2024-06-28 16:01:42,464 - config - INFO - Inter relation accuracy: 0.6989920055613487, intra relation accuracy: 0.5528340600153886.
+2024-06-28 16:01:42,464 - config - INFO - Inter relation:
+2024-06-28 16:01:42,464 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.81      0.78      0.80      4398
+         1.0       0.38      0.42      0.40      1356
+
+    accuracy                           0.70      5754
+   macro avg       0.60      0.60      0.60      5754
+weighted avg       0.71      0.70      0.70      5754
+
+2024-06-28 16:01:42,464 - config - INFO - Intra relation:
+2024-06-28 16:01:42,464 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.38      0.77      0.51      2378
+         1.0       0.82      0.46      0.59      5420
+
+    accuracy                           0.55      7798
+   macro avg       0.60      0.61      0.55      7798
+weighted avg       0.69      0.55      0.56      7798
+
+2024-06-28 16:01:43,259 - config - INFO - Round: 4
+2024-06-28 16:01:49,941 - config - INFO - Mode: ft_lm
+2024-06-28 16:01:49,941 - config - INFO - Use peft: True
+2024-06-28 16:01:51,185 - config - INFO - Epoch: 020, Loss: 0.5009, Val: 0.8374, Test: 0.8385
+2024-06-28 16:01:52,392 - config - INFO - Epoch: 040, Loss: 0.4158, Val: 0.8374, Test: 0.8385
+2024-06-28 16:01:53,587 - config - INFO - Epoch: 060, Loss: 0.4059, Val: 0.8374, Test: 0.8385
+2024-06-28 16:01:54,782 - config - INFO - Epoch: 080, Loss: 0.4004, Val: 0.8374, Test: 0.8385
+2024-06-28 16:01:55,981 - config - INFO - Epoch: 100, Loss: 0.3953, Val: 0.8374, Test: 0.8385
+2024-06-28 16:01:57,169 - config - INFO - Epoch: 120, Loss: 0.3936, Val: 0.8374, Test: 0.8385
+2024-06-28 16:01:58,351 - config - INFO - Epoch: 140, Loss: 0.3935, Val: 0.8374, Test: 0.8385
+2024-06-28 16:01:59,536 - config - INFO - Epoch: 160, Loss: 0.3901, Val: 0.8374, Test: 0.8385
+2024-06-28 16:02:00,742 - config - INFO - Epoch: 180, Loss: 0.3910, Val: 0.8374, Test: 0.8385
+2024-06-28 16:02:01,944 - config - INFO - Epoch: 200, Loss: 0.3889, Val: 0.8374, Test: 0.8385
+2024-06-28 16:02:03,141 - config - INFO - Epoch: 220, Loss: 0.3841, Val: 0.8374, Test: 0.8385
+2024-06-28 16:02:04,339 - config - INFO - Epoch: 240, Loss: 0.3862, Val: 0.8374, Test: 0.8385
+2024-06-28 16:02:05,536 - config - INFO - Epoch: 260, Loss: 0.3807, Val: 0.8374, Test: 0.8385
+2024-06-28 16:02:06,734 - config - INFO - Epoch: 280, Loss: 0.3830, Val: 0.8374, Test: 0.8385
+2024-06-28 16:02:07,933 - config - INFO - Epoch: 300, Loss: 0.3806, Val: 0.8374, Test: 0.8385
+2024-06-28 16:02:09,143 - config - INFO - Epoch: 320, Loss: 0.3790, Val: 0.8374, Test: 0.8385
+2024-06-28 16:02:10,344 - config - INFO - Epoch: 340, Loss: 0.3752, Val: 0.8374, Test: 0.8385
+2024-06-28 16:02:11,541 - config - INFO - Epoch: 360, Loss: 0.3751, Val: 0.8374, Test: 0.8385
+2024-06-28 16:02:12,733 - config - INFO - Epoch: 380, Loss: 0.3735, Val: 0.8374, Test: 0.8385
+2024-06-28 16:02:13,922 - config - INFO - Epoch: 400, Loss: 0.3693, Val: 0.8374, Test: 0.8385
+2024-06-28 16:02:15,112 - config - INFO - Epoch: 420, Loss: 0.3696, Val: 0.8374, Test: 0.8385
+2024-06-28 16:02:16,299 - config - INFO - Epoch: 440, Loss: 0.3668, Val: 0.8374, Test: 0.8385
+2024-06-28 16:02:17,493 - config - INFO - Epoch: 460, Loss: 0.3671, Val: 0.8374, Test: 0.8385
+2024-06-28 16:02:18,685 - config - INFO - Epoch: 480, Loss: 0.3624, Val: 0.8374, Test: 0.8385
+2024-06-28 16:02:19,873 - config - INFO - Epoch: 500, Loss: 0.3614, Val: 0.8374, Test: 0.8385
+2024-06-28 16:02:20,032 - config - INFO - Predict 1 from inter relation: 0.7566948533058167, intra relation: 0.7865667939186096
+2024-06-28 16:02:20,032 - config - INFO - Cut: 0.45, Acc: 0.519185360094451
+2024-06-28 16:02:20,384 - config - INFO - Predict 1 from inter relation: 0.6106413006782532, intra relation: 0.6792788505554199
+2024-06-28 16:02:20,385 - config - INFO - Cut: 0.5, Acc: 0.5633116883116883
+2024-06-28 16:02:20,574 - config - INFO - Predict 1 from inter relation: 0.4365750551223755, intra relation: 0.5377094745635986
+2024-06-28 16:02:20,574 - config - INFO - Cut: 0.55, Acc: 0.6044126328217237
+2024-06-28 16:02:20,934 - config - INFO - Predict 1 from inter relation: 0.28823113441467285, intra relation: 0.3922041654586792
+2024-06-28 16:02:20,934 - config - INFO - Cut: 0.6, Acc: 0.60706906729634
+2024-06-28 16:02:21,139 - config - INFO - Predict 1 from inter relation: 0.19221282005310059, intra relation: 0.27094972133636475
+2024-06-28 16:02:21,140 - config - INFO - Cut: 0.65, Acc: 0.5831611570247934
+2024-06-28 16:02:21,299 - config - INFO - Predict 1 from inter relation: 0.12050739675760269, intra relation: 0.1823260486125946
+2024-06-28 16:02:21,299 - config - INFO - Cut: 0.7, Acc: 0.55814639905549
+2024-06-28 16:02:21,619 - config - INFO - Predict 1 from inter relation: 0.08157152682542801, intra relation: 0.11820720881223679
+2024-06-28 16:02:21,620 - config - INFO - Cut: 0.75, Acc: 0.5360094451003542
+2024-06-28 16:02:21,620 - config - INFO - Inter relation accuracy: 0.6900986610288936, intra relation accuracy: 0.5472320975114271.
+2024-06-28 16:02:21,620 - config - INFO - Inter relation:
+2024-06-28 16:02:21,620 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.82      0.76      0.79      4329
+         1.0       0.37      0.45      0.41      1347
+
+    accuracy                           0.69      5676
+   macro avg       0.60      0.61      0.60      5676
+weighted avg       0.71      0.69      0.70      5676
+
+2024-06-28 16:02:21,620 - config - INFO - Intra relation:
+2024-06-28 16:02:21,620 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.38      0.75      0.51      2447
+         1.0       0.80      0.46      0.58      5429
+
+    accuracy                           0.55      7876
+   macro avg       0.59      0.60      0.54      7876
+weighted avg       0.67      0.55      0.56      7876
+
+2024-06-28 16:02:22,392 - config - INFO - Round: 5
+2024-06-28 16:02:28,892 - config - INFO - Mode: ft_lm
+2024-06-28 16:02:28,892 - config - INFO - Use peft: True
+2024-06-28 16:02:30,119 - config - INFO - Epoch: 020, Loss: 0.4996, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:31,308 - config - INFO - Epoch: 040, Loss: 0.4133, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:32,502 - config - INFO - Epoch: 060, Loss: 0.4023, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:33,708 - config - INFO - Epoch: 080, Loss: 0.3982, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:34,910 - config - INFO - Epoch: 100, Loss: 0.3955, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:36,122 - config - INFO - Epoch: 120, Loss: 0.3952, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:37,325 - config - INFO - Epoch: 140, Loss: 0.3919, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:38,527 - config - INFO - Epoch: 160, Loss: 0.3876, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:39,729 - config - INFO - Epoch: 180, Loss: 0.3906, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:40,943 - config - INFO - Epoch: 200, Loss: 0.3875, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:42,146 - config - INFO - Epoch: 220, Loss: 0.3819, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:43,352 - config - INFO - Epoch: 240, Loss: 0.3839, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:44,553 - config - INFO - Epoch: 260, Loss: 0.3805, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:45,745 - config - INFO - Epoch: 280, Loss: 0.3817, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:46,940 - config - INFO - Epoch: 300, Loss: 0.3765, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:48,140 - config - INFO - Epoch: 320, Loss: 0.3763, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:49,328 - config - INFO - Epoch: 340, Loss: 0.3755, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:50,518 - config - INFO - Epoch: 360, Loss: 0.3707, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:51,712 - config - INFO - Epoch: 380, Loss: 0.3720, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:52,905 - config - INFO - Epoch: 400, Loss: 0.3679, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:54,101 - config - INFO - Epoch: 420, Loss: 0.3672, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:55,302 - config - INFO - Epoch: 440, Loss: 0.3660, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:56,503 - config - INFO - Epoch: 460, Loss: 0.3617, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:57,700 - config - INFO - Epoch: 480, Loss: 0.3630, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:58,895 - config - INFO - Epoch: 500, Loss: 0.3597, Val: 0.8387, Test: 0.8322
+2024-06-28 16:02:59,056 - config - INFO - Predict 1 from inter relation: 0.7437901496887207, intra relation: 0.7742142677307129
+2024-06-28 16:02:59,057 - config - INFO - Cut: 0.45, Acc: 0.5220631641086186
+2024-06-28 16:02:59,407 - config - INFO - Predict 1 from inter relation: 0.5911064743995667, intra relation: 0.663887083530426
+2024-06-28 16:02:59,407 - config - INFO - Cut: 0.5, Acc: 0.5624262101534829
+2024-06-28 16:02:59,608 - config - INFO - Predict 1 from inter relation: 0.4161889851093292, intra relation: 0.50673508644104
+2024-06-28 16:02:59,609 - config - INFO - Cut: 0.55, Acc: 0.5957792207792207
+2024-06-28 16:02:59,965 - config - INFO - Predict 1 from inter relation: 0.26958486437797546, intra relation: 0.36343809962272644
+2024-06-28 16:02:59,966 - config - INFO - Cut: 0.6, Acc: 0.5974763872491146
+2024-06-28 16:03:00,168 - config - INFO - Predict 1 from inter relation: 0.17057494819164276, intra relation: 0.24810776114463806
+2024-06-28 16:03:00,169 - config - INFO - Cut: 0.65, Acc: 0.5757083825265643
+2024-06-28 16:03:00,330 - config - INFO - Predict 1 from inter relation: 0.1141219362616539, intra relation: 0.16446439921855927
+2024-06-28 16:03:00,331 - config - INFO - Cut: 0.7, Acc: 0.5532024793388429
+2024-06-28 16:03:00,649 - config - INFO - Predict 1 from inter relation: 0.0760812908411026, intra relation: 0.1045541986823082
+2024-06-28 16:03:00,649 - config - INFO - Cut: 0.75, Acc: 0.5357880755608029
+2024-06-28 16:03:00,649 - config - INFO - Inter relation accuracy: 0.6807364947021017, intra relation accuracy: 0.5359846055163566.
+2024-06-28 16:03:00,649 - config - INFO - Inter relation:
+2024-06-28 16:03:00,649 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.80      0.77      0.79      4393
+         1.0       0.35      0.40      0.37      1364
+
+    accuracy                           0.68      5757
+   macro avg       0.58      0.58      0.58      5757
+weighted avg       0.70      0.68      0.69      5757
+
+2024-06-28 16:03:00,649 - config - INFO - Intra relation:
+2024-06-28 16:03:00,649 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.38      0.78      0.51      2383
+         1.0       0.82      0.43      0.56      5412
+
+    accuracy                           0.54      7795
+   macro avg       0.60      0.60      0.53      7795
+weighted avg       0.68      0.54      0.54      7795
+
+2024-06-28 16:03:01,456 - config - INFO - Round: 6
+2024-06-28 16:03:08,026 - config - INFO - Mode: ft_lm
+2024-06-28 16:03:08,026 - config - INFO - Use peft: True
+2024-06-28 16:03:09,254 - config - INFO - Epoch: 020, Loss: 0.5462, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:10,454 - config - INFO - Epoch: 040, Loss: 0.4180, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:11,661 - config - INFO - Epoch: 060, Loss: 0.4015, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:12,847 - config - INFO - Epoch: 080, Loss: 0.3979, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:14,035 - config - INFO - Epoch: 100, Loss: 0.3924, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:15,225 - config - INFO - Epoch: 120, Loss: 0.3896, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:16,416 - config - INFO - Epoch: 140, Loss: 0.3899, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:17,608 - config - INFO - Epoch: 160, Loss: 0.3857, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:18,810 - config - INFO - Epoch: 180, Loss: 0.3866, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:20,038 - config - INFO - Epoch: 200, Loss: 0.3834, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:21,236 - config - INFO - Epoch: 220, Loss: 0.3840, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:22,437 - config - INFO - Epoch: 240, Loss: 0.3820, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:23,640 - config - INFO - Epoch: 260, Loss: 0.3800, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:24,843 - config - INFO - Epoch: 280, Loss: 0.3785, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:26,039 - config - INFO - Epoch: 300, Loss: 0.3752, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:27,235 - config - INFO - Epoch: 320, Loss: 0.3756, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:28,440 - config - INFO - Epoch: 340, Loss: 0.3736, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:29,667 - config - INFO - Epoch: 360, Loss: 0.3726, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:30,864 - config - INFO - Epoch: 380, Loss: 0.3701, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:32,065 - config - INFO - Epoch: 400, Loss: 0.3693, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:33,266 - config - INFO - Epoch: 420, Loss: 0.3688, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:34,471 - config - INFO - Epoch: 440, Loss: 0.3647, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:35,674 - config - INFO - Epoch: 460, Loss: 0.3664, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:36,883 - config - INFO - Epoch: 480, Loss: 0.3645, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:38,083 - config - INFO - Epoch: 500, Loss: 0.3635, Val: 0.8332, Test: 0.8318
+2024-06-28 16:03:38,241 - config - INFO - Predict 1 from inter relation: 0.7559096217155457, intra relation: 0.7743909955024719
+2024-06-28 16:03:38,241 - config - INFO - Cut: 0.45, Acc: 0.526047815820543
+2024-06-28 16:03:38,594 - config - INFO - Predict 1 from inter relation: 0.6165295243263245, intra relation: 0.6661140322685242
+2024-06-28 16:03:38,595 - config - INFO - Cut: 0.5, Acc: 0.564344746162928
+2024-06-28 16:03:38,793 - config - INFO - Predict 1 from inter relation: 0.4381019175052643, intra relation: 0.5207244157791138
+2024-06-28 16:03:38,794 - config - INFO - Cut: 0.55, Acc: 0.598952184179457
+2024-06-28 16:03:39,150 - config - INFO - Predict 1 from inter relation: 0.2813867926597595, intra relation: 0.37724781036376953
+2024-06-28 16:03:39,151 - config - INFO - Cut: 0.6, Acc: 0.6092827626918536
+2024-06-28 16:03:39,356 - config - INFO - Predict 1 from inter relation: 0.1826300173997879, intra relation: 0.2602984309196472
+2024-06-28 16:03:39,356 - config - INFO - Cut: 0.65, Acc: 0.5851534828807556
+2024-06-28 16:03:39,673 - config - INFO - Predict 1 from inter relation: 0.12081947177648544, intra relation: 0.17497767508029938
+2024-06-28 16:03:39,674 - config - INFO - Cut: 0.7, Acc: 0.5602125147579693
+2024-06-28 16:03:39,835 - config - INFO - Predict 1 from inter relation: 0.0772194042801857, intra relation: 0.11554648727178574
+2024-06-28 16:03:39,836 - config - INFO - Cut: 0.75, Acc: 0.5416912632821723
+2024-06-28 16:03:39,836 - config - INFO - Inter relation accuracy: 0.690597093328664, intra relation accuracy: 0.5500573906389491.
+2024-06-28 16:03:39,836 - config - INFO - Inter relation:
+2024-06-28 16:03:39,836 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.82      0.77      0.79      4375
+         1.0       0.37      0.44      0.40      1336
+
+    accuracy                           0.69      5711
+   macro avg       0.59      0.60      0.60      5711
+weighted avg       0.71      0.69      0.70      5711
+
+2024-06-28 16:03:39,836 - config - INFO - Intra relation:
+2024-06-28 16:03:39,836 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.38      0.78      0.52      2401
+         1.0       0.82      0.45      0.58      5440
+
+    accuracy                           0.55      7841
+   macro avg       0.60      0.61      0.55      7841
+weighted avg       0.69      0.55      0.56      7841
+
+2024-06-28 16:03:40,638 - config - INFO - Round: 7
+2024-06-28 16:03:47,369 - config - INFO - Mode: ft_lm
+2024-06-28 16:03:47,369 - config - INFO - Use peft: True
+2024-06-28 16:03:48,616 - config - INFO - Epoch: 020, Loss: 0.5081, Val: 0.8352, Test: 0.8383
+2024-06-28 16:03:49,830 - config - INFO - Epoch: 040, Loss: 0.4117, Val: 0.8352, Test: 0.8383
+2024-06-28 16:03:51,044 - config - INFO - Epoch: 060, Loss: 0.4046, Val: 0.8352, Test: 0.8383
+2024-06-28 16:03:52,255 - config - INFO - Epoch: 080, Loss: 0.3987, Val: 0.8352, Test: 0.8383
+2024-06-28 16:03:53,457 - config - INFO - Epoch: 100, Loss: 0.3931, Val: 0.8352, Test: 0.8383
+2024-06-28 16:03:54,660 - config - INFO - Epoch: 120, Loss: 0.3934, Val: 0.8352, Test: 0.8383
+2024-06-28 16:03:55,876 - config - INFO - Epoch: 140, Loss: 0.3908, Val: 0.8352, Test: 0.8383
+2024-06-28 16:03:57,081 - config - INFO - Epoch: 160, Loss: 0.3886, Val: 0.8352, Test: 0.8383
+2024-06-28 16:03:58,284 - config - INFO - Epoch: 180, Loss: 0.3878, Val: 0.8352, Test: 0.8383
+2024-06-28 16:03:59,482 - config - INFO - Epoch: 200, Loss: 0.3869, Val: 0.8352, Test: 0.8383
+2024-06-28 16:04:00,676 - config - INFO - Epoch: 220, Loss: 0.3826, Val: 0.8352, Test: 0.8383
+2024-06-28 16:04:01,870 - config - INFO - Epoch: 240, Loss: 0.3818, Val: 0.8352, Test: 0.8383
+2024-06-28 16:04:03,071 - config - INFO - Epoch: 260, Loss: 0.3805, Val: 0.8352, Test: 0.8383
+2024-06-28 16:04:04,273 - config - INFO - Epoch: 280, Loss: 0.3796, Val: 0.8352, Test: 0.8383
+2024-06-28 16:04:05,471 - config - INFO - Epoch: 300, Loss: 0.3797, Val: 0.8352, Test: 0.8383
+2024-06-28 16:04:06,668 - config - INFO - Epoch: 320, Loss: 0.3759, Val: 0.8352, Test: 0.8383
+2024-06-28 16:04:07,882 - config - INFO - Epoch: 340, Loss: 0.3725, Val: 0.8352, Test: 0.8383
+2024-06-28 16:04:09,075 - config - INFO - Epoch: 360, Loss: 0.3713, Val: 0.8352, Test: 0.8383
+2024-06-28 16:04:10,271 - config - INFO - Epoch: 380, Loss: 0.3718, Val: 0.8352, Test: 0.8383
+2024-06-28 16:04:11,473 - config - INFO - Epoch: 400, Loss: 0.3708, Val: 0.8352, Test: 0.8383
+2024-06-28 16:04:12,683 - config - INFO - Epoch: 420, Loss: 0.3690, Val: 0.8352, Test: 0.8383
+2024-06-28 16:04:13,888 - config - INFO - Epoch: 440, Loss: 0.3678, Val: 0.8352, Test: 0.8383
+2024-06-28 16:04:15,098 - config - INFO - Epoch: 460, Loss: 0.3662, Val: 0.8352, Test: 0.8383
+2024-06-28 16:04:16,296 - config - INFO - Epoch: 480, Loss: 0.3662, Val: 0.8352, Test: 0.8383
+2024-06-28 16:04:17,482 - config - INFO - Epoch: 500, Loss: 0.3635, Val: 0.8352, Test: 0.8383
+2024-06-28 16:04:17,795 - config - INFO - Predict 1 from inter relation: 0.7543118596076965, intra relation: 0.7919949293136597
+2024-06-28 16:04:17,796 - config - INFO - Cut: 0.45, Acc: 0.5232438016528925
+2024-06-28 16:04:17,994 - config - INFO - Predict 1 from inter relation: 0.61017245054245, intra relation: 0.6817026734352112
+2024-06-28 16:04:17,994 - config - INFO - Cut: 0.5, Acc: 0.5641971664698937
+2024-06-28 16:04:18,193 - config - INFO - Predict 1 from inter relation: 0.43611404299736023, intra relation: 0.5381194353103638
+2024-06-28 16:04:18,193 - config - INFO - Cut: 0.55, Acc: 0.6082497048406139
+2024-06-28 16:04:18,551 - config - INFO - Predict 1 from inter relation: 0.29056671261787415, intra relation: 0.3909783959388733
+2024-06-28 16:04:18,552 - config - INFO - Cut: 0.6, Acc: 0.6118654073199528
+2024-06-28 16:04:18,753 - config - INFO - Predict 1 from inter relation: 0.1886659562587738, intra relation: 0.2642948031425476
+2024-06-28 16:04:18,754 - config - INFO - Cut: 0.65, Acc: 0.5892857142857143
+2024-06-28 16:04:19,070 - config - INFO - Predict 1 from inter relation: 0.12390003353357315, intra relation: 0.17623887956142426
+2024-06-28 16:04:19,071 - config - INFO - Cut: 0.7, Acc: 0.5611717827626919
+2024-06-28 16:04:19,230 - config - INFO - Predict 1 from inter relation: 0.0830693393945694, intra relation: 0.11385006457567215
+2024-06-28 16:04:19,231 - config - INFO - Cut: 0.75, Acc: 0.5380755608028335
+2024-06-28 16:04:19,231 - config - INFO - Inter relation accuracy: 0.6833861316437874, intra relation accuracy: 0.5602287166454892.
+2024-06-28 16:04:19,231 - config - INFO - Inter relation:
+2024-06-28 16:04:19,231 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.82      0.75      0.79      4388
+         1.0       0.35      0.44      0.39      1294
+
+    accuracy                           0.68      5682
+   macro avg       0.58      0.60      0.59      5682
+weighted avg       0.71      0.68      0.70      5682
+
+2024-06-28 16:04:19,231 - config - INFO - Intra relation:
+2024-06-28 16:04:19,231 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.39      0.78      0.52      2388
+         1.0       0.83      0.46      0.60      5482
+
+    accuracy                           0.56      7870
+   macro avg       0.61      0.62      0.56      7870
+weighted avg       0.69      0.56      0.57      7870
+
+2024-06-28 16:04:20,023 - config - INFO - Round: 8
+2024-06-28 16:04:26,533 - config - INFO - Mode: ft_lm
+2024-06-28 16:04:26,533 - config - INFO - Use peft: True
+2024-06-28 16:04:27,762 - config - INFO - Epoch: 020, Loss: 0.5570, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:28,972 - config - INFO - Epoch: 040, Loss: 0.4164, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:30,162 - config - INFO - Epoch: 060, Loss: 0.4032, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:31,357 - config - INFO - Epoch: 080, Loss: 0.3994, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:32,548 - config - INFO - Epoch: 100, Loss: 0.3963, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:33,746 - config - INFO - Epoch: 120, Loss: 0.3963, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:34,944 - config - INFO - Epoch: 140, Loss: 0.3938, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:36,126 - config - INFO - Epoch: 160, Loss: 0.3894, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:37,338 - config - INFO - Epoch: 180, Loss: 0.3878, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:38,542 - config - INFO - Epoch: 200, Loss: 0.3856, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:39,749 - config - INFO - Epoch: 220, Loss: 0.3873, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:40,953 - config - INFO - Epoch: 240, Loss: 0.3821, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:42,167 - config - INFO - Epoch: 260, Loss: 0.3838, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:43,384 - config - INFO - Epoch: 280, Loss: 0.3820, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:44,609 - config - INFO - Epoch: 300, Loss: 0.3785, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:45,828 - config - INFO - Epoch: 320, Loss: 0.3777, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:47,032 - config - INFO - Epoch: 340, Loss: 0.3760, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:48,238 - config - INFO - Epoch: 360, Loss: 0.3759, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:49,441 - config - INFO - Epoch: 380, Loss: 0.3716, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:50,654 - config - INFO - Epoch: 400, Loss: 0.3719, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:51,873 - config - INFO - Epoch: 420, Loss: 0.3694, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:53,096 - config - INFO - Epoch: 440, Loss: 0.3694, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:54,321 - config - INFO - Epoch: 460, Loss: 0.3678, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:55,547 - config - INFO - Epoch: 480, Loss: 0.3653, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:56,765 - config - INFO - Epoch: 500, Loss: 0.3664, Val: 0.8398, Test: 0.8302
+2024-06-28 16:04:57,083 - config - INFO - Predict 1 from inter relation: 0.7564666271209717, intra relation: 0.7945101261138916
+2024-06-28 16:04:57,084 - config - INFO - Cut: 0.45, Acc: 0.5288518299881936
+2024-06-28 16:04:57,274 - config - INFO - Predict 1 from inter relation: 0.6079535484313965, intra relation: 0.6868725419044495
+2024-06-28 16:04:57,275 - config - INFO - Cut: 0.5, Acc: 0.5661157024793388
+2024-06-28 16:04:57,633 - config - INFO - Predict 1 from inter relation: 0.42495161294937134, intra relation: 0.5406023859977722
+2024-06-28 16:04:57,634 - config - INFO - Cut: 0.55, Acc: 0.6052981109799291
+2024-06-28 16:04:57,836 - config - INFO - Predict 1 from inter relation: 0.2746788561344147, intra relation: 0.3919176459312439
+2024-06-28 16:04:57,837 - config - INFO - Cut: 0.6, Acc: 0.6097255017709563
+2024-06-28 16:04:58,043 - config - INFO - Predict 1 from inter relation: 0.17807495594024658, intra relation: 0.2681407928466797
+2024-06-28 16:04:58,044 - config - INFO - Cut: 0.65, Acc: 0.5858913813459268
+2024-06-28 16:04:58,366 - config - INFO - Predict 1 from inter relation: 0.11226464807987213, intra relation: 0.17765916883945465
+2024-06-28 16:04:58,366 - config - INFO - Cut: 0.7, Acc: 0.560064935064935
+2024-06-28 16:04:58,526 - config - INFO - Predict 1 from inter relation: 0.07302480936050415, intra relation: 0.11577074229717255
+2024-06-28 16:04:58,526 - config - INFO - Cut: 0.75, Acc: 0.5399940968122786
+2024-06-28 16:04:58,526 - config - INFO - Inter relation accuracy: 0.6954073552701038, intra relation accuracy: 0.5478459778879146.
+2024-06-28 16:04:58,526 - config - INFO - Inter relation:
+2024-06-28 16:04:58,526 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.82      0.77      0.80      4399
+         1.0       0.36      0.43      0.39      1284
+
+    accuracy                           0.70      5683
+   macro avg       0.59      0.60      0.59      5683
+weighted avg       0.72      0.70      0.71      5683
+
+2024-06-28 16:04:58,526 - config - INFO - Intra relation:
+2024-06-28 16:04:58,526 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.38      0.76      0.50      2377
+         1.0       0.81      0.46      0.59      5492
+
+    accuracy                           0.55      7869
+   macro avg       0.60      0.61      0.54      7869
+weighted avg       0.68      0.55      0.56      7869
+
+2024-06-28 16:04:59,324 - config - INFO - Round: 9
+2024-06-28 16:05:06,005 - config - INFO - Mode: ft_lm
+2024-06-28 16:05:06,006 - config - INFO - Use peft: True
+2024-06-28 16:05:07,245 - config - INFO - Epoch: 020, Loss: 0.5050, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:08,449 - config - INFO - Epoch: 040, Loss: 0.4179, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:09,654 - config - INFO - Epoch: 060, Loss: 0.4021, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:10,861 - config - INFO - Epoch: 080, Loss: 0.4030, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:12,082 - config - INFO - Epoch: 100, Loss: 0.3950, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:13,308 - config - INFO - Epoch: 120, Loss: 0.3950, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:14,513 - config - INFO - Epoch: 140, Loss: 0.3925, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:15,721 - config - INFO - Epoch: 160, Loss: 0.3914, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:16,929 - config - INFO - Epoch: 180, Loss: 0.3895, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:18,137 - config - INFO - Epoch: 200, Loss: 0.3863, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:19,354 - config - INFO - Epoch: 220, Loss: 0.3846, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:20,565 - config - INFO - Epoch: 240, Loss: 0.3824, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:21,768 - config - INFO - Epoch: 260, Loss: 0.3827, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:22,972 - config - INFO - Epoch: 280, Loss: 0.3810, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:24,198 - config - INFO - Epoch: 300, Loss: 0.3780, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:25,411 - config - INFO - Epoch: 320, Loss: 0.3757, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:26,619 - config - INFO - Epoch: 340, Loss: 0.3725, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:27,833 - config - INFO - Epoch: 360, Loss: 0.3750, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:29,055 - config - INFO - Epoch: 380, Loss: 0.3698, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:30,266 - config - INFO - Epoch: 400, Loss: 0.3674, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:31,468 - config - INFO - Epoch: 420, Loss: 0.3661, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:32,675 - config - INFO - Epoch: 440, Loss: 0.3624, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:33,889 - config - INFO - Epoch: 460, Loss: 0.3643, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:35,094 - config - INFO - Epoch: 480, Loss: 0.3609, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:36,301 - config - INFO - Epoch: 500, Loss: 0.3637, Val: 0.8367, Test: 0.8425
+2024-06-28 16:05:36,623 - config - INFO - Predict 1 from inter relation: 0.7530120611190796, intra relation: 0.7784522175788879
+2024-06-28 16:05:36,624 - config - INFO - Cut: 0.45, Acc: 0.5250885478158206
+2024-06-28 16:05:36,813 - config - INFO - Predict 1 from inter relation: 0.6008149981498718, intra relation: 0.6784269213676453
+2024-06-28 16:05:36,814 - config - INFO - Cut: 0.5, Acc: 0.5689197166469894
+2024-06-28 16:05:37,175 - config - INFO - Predict 1 from inter relation: 0.4188518822193146, intra relation: 0.5259231328964233
+2024-06-28 16:05:37,176 - config - INFO - Cut: 0.55, Acc: 0.603969893742621
+2024-06-28 16:05:37,376 - config - INFO - Predict 1 from inter relation: 0.27551382780075073, intra relation: 0.37582194805145264
+2024-06-28 16:05:37,377 - config - INFO - Cut: 0.6, Acc: 0.609577922077922
+2024-06-28 16:05:37,584 - config - INFO - Predict 1 from inter relation: 0.17735648155212402, intra relation: 0.2540465295314789
+2024-06-28 16:05:37,585 - config - INFO - Cut: 0.65, Acc: 0.586629279811098
+2024-06-28 16:05:37,914 - config - INFO - Predict 1 from inter relation: 0.1181785985827446, intra relation: 0.1654021292924881
+2024-06-28 16:05:37,915 - config - INFO - Cut: 0.7, Acc: 0.559400826446281
+2024-06-28 16:05:38,078 - config - INFO - Predict 1 from inter relation: 0.0765414610505104, intra relation: 0.10558927804231644
+2024-06-28 16:05:38,079 - config - INFO - Cut: 0.75, Acc: 0.5362308146399055
+2024-06-28 16:05:38,079 - config - INFO - Inter relation accuracy: 0.6948972360028348, intra relation accuracy: 0.5486848760748609.
+2024-06-28 16:05:38,079 - config - INFO - Inter relation:
+2024-06-28 16:05:38,079 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.82      0.77      0.80      4337
+         1.0       0.37      0.44      0.40      1307
+
+    accuracy                           0.69      5644
+   macro avg       0.59      0.60      0.60      5644
+weighted avg       0.71      0.69      0.70      5644
+
+2024-06-28 16:05:38,079 - config - INFO - Intra relation:
+2024-06-28 16:05:38,079 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.39      0.78      0.52      2439
+         1.0       0.82      0.45      0.58      5469
+
+    accuracy                           0.55      7908
+   macro avg       0.60      0.61      0.55      7908
+weighted avg       0.69      0.55      0.56      7908
+
+2024-06-28 16:05:38,867 - config - INFO - Round: 10
+2024-06-28 16:05:45,661 - config - INFO - Mode: ft_lm
+2024-06-28 16:05:45,661 - config - INFO - Use peft: True
+2024-06-28 16:05:46,922 - config - INFO - Epoch: 020, Loss: 0.4979, Val: 0.8323, Test: 0.8417
+2024-06-28 16:05:48,148 - config - INFO - Epoch: 040, Loss: 0.4214, Val: 0.8323, Test: 0.8417
+2024-06-28 16:05:49,373 - config - INFO - Epoch: 060, Loss: 0.4065, Val: 0.8323, Test: 0.8417
+2024-06-28 16:05:50,607 - config - INFO - Epoch: 080, Loss: 0.4009, Val: 0.8323, Test: 0.8417
+2024-06-28 16:05:51,827 - config - INFO - Epoch: 100, Loss: 0.3981, Val: 0.8323, Test: 0.8417
+2024-06-28 16:05:53,052 - config - INFO - Epoch: 120, Loss: 0.3976, Val: 0.8323, Test: 0.8417
+2024-06-28 16:05:54,255 - config - INFO - Epoch: 140, Loss: 0.3945, Val: 0.8323, Test: 0.8417
+2024-06-28 16:05:55,477 - config - INFO - Epoch: 160, Loss: 0.3922, Val: 0.8323, Test: 0.8417
+2024-06-28 16:05:56,732 - config - INFO - Epoch: 180, Loss: 0.3941, Val: 0.8323, Test: 0.8417
+2024-06-28 16:05:57,955 - config - INFO - Epoch: 200, Loss: 0.3874, Val: 0.8323, Test: 0.8417
+2024-06-28 16:05:59,158 - config - INFO - Epoch: 220, Loss: 0.3864, Val: 0.8323, Test: 0.8417
+2024-06-28 16:06:00,369 - config - INFO - Epoch: 240, Loss: 0.3844, Val: 0.8323, Test: 0.8417
+2024-06-28 16:06:01,573 - config - INFO - Epoch: 260, Loss: 0.3854, Val: 0.8323, Test: 0.8417
+2024-06-28 16:06:02,781 - config - INFO - Epoch: 280, Loss: 0.3817, Val: 0.8323, Test: 0.8417
+2024-06-28 16:06:03,990 - config - INFO - Epoch: 300, Loss: 0.3779, Val: 0.8323, Test: 0.8417
+2024-06-28 16:06:05,202 - config - INFO - Epoch: 320, Loss: 0.3785, Val: 0.8323, Test: 0.8417
+2024-06-28 16:06:06,408 - config - INFO - Epoch: 340, Loss: 0.3774, Val: 0.8323, Test: 0.8417
+2024-06-28 16:06:07,612 - config - INFO - Epoch: 360, Loss: 0.3762, Val: 0.8323, Test: 0.8417
+2024-06-28 16:06:08,811 - config - INFO - Epoch: 380, Loss: 0.3742, Val: 0.8323, Test: 0.8417
+2024-06-28 16:06:10,020 - config - INFO - Epoch: 400, Loss: 0.3714, Val: 0.8323, Test: 0.8417
+2024-06-28 16:06:11,233 - config - INFO - Epoch: 420, Loss: 0.3682, Val: 0.8323, Test: 0.8417
+2024-06-28 16:06:12,433 - config - INFO - Epoch: 440, Loss: 0.3689, Val: 0.8323, Test: 0.8417
+2024-06-28 16:06:13,629 - config - INFO - Epoch: 460, Loss: 0.3650, Val: 0.8323, Test: 0.8417
+2024-06-28 16:06:14,831 - config - INFO - Epoch: 480, Loss: 0.3650, Val: 0.8323, Test: 0.8417
+2024-06-28 16:06:16,036 - config - INFO - Epoch: 500, Loss: 0.3628, Val: 0.8323, Test: 0.8417
+2024-06-28 16:06:16,352 - config - INFO - Predict 1 from inter relation: 0.7395543456077576, intra relation: 0.7853483557701111
+2024-06-28 16:06:16,352 - config - INFO - Cut: 0.45, Acc: 0.518004722550177
+2024-06-28 16:06:16,541 - config - INFO - Predict 1 from inter relation: 0.5905292630195618, intra relation: 0.6746926307678223
+2024-06-28 16:06:16,542 - config - INFO - Cut: 0.5, Acc: 0.5637544273907911
+2024-06-28 16:06:16,902 - config - INFO - Predict 1 from inter relation: 0.4051183760166168, intra relation: 0.5258709192276001
+2024-06-28 16:06:16,902 - config - INFO - Cut: 0.55, Acc: 0.6060360094451004
+2024-06-28 16:06:17,105 - config - INFO - Predict 1 from inter relation: 0.263579398393631, intra relation: 0.3808913826942444
+2024-06-28 16:06:17,106 - config - INFO - Cut: 0.6, Acc: 0.6072904368358913
+2024-06-28 16:06:17,468 - config - INFO - Predict 1 from inter relation: 0.1678272932767868, intra relation: 0.26165470480918884
+2024-06-28 16:06:17,469 - config - INFO - Cut: 0.65, Acc: 0.5846369539551358
+2024-06-28 16:06:17,630 - config - INFO - Predict 1 from inter relation: 0.11037604510784149, intra relation: 0.17533299326896667
+2024-06-28 16:06:17,630 - config - INFO - Cut: 0.7, Acc: 0.5614669421487604
+2024-06-28 16:06:17,791 - config - INFO - Predict 1 from inter relation: 0.07224930077791214, intra relation: 0.1153944656252861
+2024-06-28 16:06:17,791 - config - INFO - Cut: 0.75, Acc: 0.5413223140495868
+2024-06-28 16:06:17,792 - config - INFO - Inter relation accuracy: 0.6892409470752089, intra relation accuracy: 0.5470030737704918.
+2024-06-28 16:06:17,792 - config - INFO - Inter relation:
+2024-06-28 16:06:17,792 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.81      0.78      0.79      4409
+         1.0       0.35      0.40      0.37      1335
+
+    accuracy                           0.69      5744
+   macro avg       0.58      0.59      0.58      5744
+weighted avg       0.70      0.69      0.70      5744
+
+2024-06-28 16:06:17,792 - config - INFO - Intra relation:
+2024-06-28 16:06:17,792 - config - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.38      0.77      0.51      2367
+         1.0       0.82      0.45      0.58      5441
+
+    accuracy                           0.55      7808
+   macro avg       0.60      0.61      0.54      7808
+weighted avg       0.69      0.55      0.56      7808
+
+2024-06-28 16:06:18,735 - config - INFO - ACC: 60.802834 +- 0.444629
+2024-06-28 16:06:18,735 - config - INFO - AUC: 83.595301 +- 0.447902
+2024-06-28 16:06:18,735 - config - INFO - DP mix: 10.678316 +- 1.031852
+2024-06-28 16:06:18,735 - config - INFO - EoP mix: 2.882582 +- 1.314893
+2024-06-28 16:06:18,735 - config - INFO - DP group: 1.663843 +- 0.851779
+2024-06-28 16:06:18,735 - config - INFO - EoP group: 3.101120 +- 1.141774
+2024-06-28 16:06:18,735 - config - INFO - DP sub: 13.478108 +- 1.041458
+2024-06-28 16:06:18,735 - config - INFO - EoP sub: 9.423963 +- 3.626211

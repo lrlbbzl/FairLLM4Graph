@@ -28,6 +28,11 @@ from tqdm import tqdm
 
 from config import logger
 
+Pooler = {
+    'mean' : MeanPooling(),
+    'max' : MaxPooling()
+}
+
 def finetune_lm(args, data, text):
     neg_edges_train = negative_sampling(
             edge_index=data.train_pos_edge_index,
@@ -120,10 +125,7 @@ def merge_modeling(args, g, text):
                     return_tensors='pt')
     encode_data = EncodeDataset(inputs['input_ids'], inputs['attention_mask'])
     data_loader = DataLoader(encode_data, batch_size=args.infer_batch_size, shuffle=False, num_workers=4)
-    if args.pooling == 'mean':
-        pooler = MeanPooling()
-    elif args.pooling == 'max':
-        pooler = MaxPooling()
+    pooler = Pooler[args.pooling]
     res = []
     logger.info("Get Embedding. Total time: {}".format(len(encode_data) / args.infer_batch_size))
     for step, data in tqdm(enumerate(data_loader)):
@@ -163,9 +165,11 @@ def merge_modeling(args, g, text):
         pooler = MaxPooling()
     res = []
     logger.info("Get Embedding. Total time: {}".format(len(encode_data) / args.infer_batch_size))
-    for step, data in tqdm(enumerate(data_loader)):
-        input_ids, attention_mask = data['input_ids'].to(lm.device), data['attention_mask'].to(lm.device)
-        outputs = model(input_ids, attention_mask)
-        outputs = pooler(outputs.last_hidden_state, attention_mask)
-        res.append(outputs)
+    with torch.no_grad():
+        for step, data in tqdm(enumerate(data_loader)):
+            input_ids, attention_mask = data['input_ids'].to(lm.device), data['attention_mask'].to(lm.device)
+            outputs = model(input_ids, attention_mask)
+            outputs = pooler(outputs.last_hidden_state, attention_mask)
+            res.append(outputs)
+        
     return torch.cat(res, dim=0)
