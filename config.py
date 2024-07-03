@@ -28,13 +28,18 @@ parser.add_argument('--lm-batch-size', type=int, default=8)
 parser.add_argument('--lm-epochs', type=int, default=2)
 parser.add_argument('--sm-batch-size', type=int, default=2)
 parser.add_argument('--infer-batch-size', type=int, default=8)
-parser.add_argument('--ft-lr', type=float, default=1e-4)
+parser.add_argument('--ft-lr', type=float, default=1e-5)
 # peft config
 parser.add_argument('--peft-r', type=int, default=8)
 parser.add_argument('--peft-lora-alpha', type=int, default=8)
 parser.add_argument('--peft-lora-dropout', type=float, default=0.2)
 parser.add_argument('--use-peft', action='store_true')
+parser.add_argument('--use-full', action='store_true')
 parser.add_argument('--eval-steps', type=int, default=500)
+parser.add_argument('--logging-steps', type=int, default=50)
+
+# idea
+parser.add_argument('--filter', action='store_true')
 
 args = parser.parse_args()
  

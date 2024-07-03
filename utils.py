@@ -5,6 +5,29 @@ from fairlearn.metrics import (
 )
 import numpy as np
 from itertools import combinations_with_replacement
+from torch import nn
+import torch.nn.functional as F
+
+class CustomCrossEntropyLoss(nn.Module):
+    def __init__(self, sensitive_weight=1.0, non_sensitive_weight=1.0):
+        super(CustomCrossEntropyLoss, self).__init__()
+        self.sensitive_weight = sensitive_weight
+        self.non_sensitive_weight = non_sensitive_weight
+
+    def forward(self, input, target, sensitive_attr):
+        """
+        input: (bs,)
+        target: (bs,)
+        """
+        log_softmax = F.log_softmax(input, dim=1)
+        target_one_hot = F.one_hot(target, num_classes=input.shape[1])
+        loss = torch.sum(-1 * target_one_hot * log_softmax, dim=1)
+
+        # 根据敏感属性标签设置权重
+        weights = torch.where(sensitive_attr == 1, torch.tensor(self.sensitive_weight), torch.tensor(self.non_sensitive_weight))
+        loss = loss * weights.float()
+        
+        return torch.mean(loss)
 
 def get_link_labels(pos_edge_index, neg_edge_index):
     E = pos_edge_index.size(1) + neg_edge_index.size(1)

@@ -69,15 +69,17 @@ class LP_model(nn.Module):
                                                 device_map='auto')
 
         if args.mode == 'ft_lm':
-            lora_config = LoraConfig(
-                task_type=TaskType.SEQ_CLS,
-                inference_mode=False,
-                r=args.peft_r,
-                lora_alpha=args.peft_lora_alpha,
-                lora_dropout=args.peft_lora_dropout
-            )
-            self.model = PeftModel(self.model, lora_config)
-            self.model.print_trainable_parameters()
+            if args.use_peft:
+                lora_config = LoraConfig(
+                    task_type=TaskType.SEQ_CLS,
+                    inference_mode=False,
+                    r=args.peft_r,
+                    lora_alpha=args.peft_lora_alpha,
+                    lora_dropout=args.peft_lora_dropout
+                )
+                self.model = PeftModel(self.model, lora_config)
+                self.model.print_trainable_parameters()
+            ### else full, use total model parameters
 
 
         lp_config = {
