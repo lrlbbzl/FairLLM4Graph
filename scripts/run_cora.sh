@@ -4,7 +4,16 @@ wandb offline
 python main.py --conv-name gcn \
     --mode ft_lm \
     --dataset cora \
-    --eval-steps 500 \
-    --epoch 200 \
-    
+    --epoch 500 \
+    --use-peft \
+    --lm-epochs 10 \
+    --lm-batch-size 32 \
+    --sm-batch-size 32 \
+    --oracle-sm-batch-size 32\
+    --oracle-batch-size 32\
+    --logging-steps 10 \
+    --eval-steps 200 \
+    --ft-lr 1e-3 \
+    --filter \
+    --add-kl
     
