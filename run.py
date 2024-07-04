@@ -73,7 +73,6 @@ def run(args):
         logger.info("Use peft: {}".format(args.use_peft))
         logger.info("Use full: {}".format(args.use_full))
         logger.info("Filtering: {}".format(args.filter))
-        args.plm_name = args.plm_path[args.plm_path.rfind('/') + 1:]
         if args.mode == 'ft_lm' and not args.filter:
             ## Start fine-tune LLM for Graph context
             args.model_path = osp.join(args.output_dir, osp.join(args.dataset, args.plm_name))

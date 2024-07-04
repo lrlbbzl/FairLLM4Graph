@@ -155,14 +155,20 @@ def finetune_lm_on_filtering(args, data, text):
                     return_tensors='pt',)
     p = osp.join(osp.join(args.input_dir, args.dataset), 'filter_data.pt')
     train_edge_idx = torch.load(p)
-    train_dataset = LPDataset(inputs['input_ids'],
+
+    if args.add_kl:
+        train_dataset = LPDataset(inputs['input_ids'],
                               inputs['attention_mask'],
                               train_edge_idx['pos_edge'],
-                              train_edge_idx['neg_edge'])
+                              train_edge_idx['neg_edge'],
+                              oracle_edges=train_edge_idx['oracle_edge'])
+        
+    else:
+        train_dataset = LPDataset(inputs['input_ids'],
+                                inputs['attention_mask'],
+                                train_edge_idx['pos_edge'],
+                                train_edge_idx['neg_edge'])
     model = LP_model(args)
-    # for da in train_dataloader:
-    #     output = model(input_ids=da['input_ids'], attention_mask=da['attention_mask'])
-    #     import pdb; pdb.set_trace()
 
     training_args = TrainingArguments(
         per_device_train_batch_size=args.sm_batch_size,

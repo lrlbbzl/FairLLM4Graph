@@ -40,6 +40,11 @@ parser.add_argument('--logging-steps', type=int, default=50)
 
 # idea
 parser.add_argument('--filter', action='store_true')
+parser.add_argument('--add-kl', action='store_true')
+parser.add_argument('--oracle-sm-batch-size', type=int, default=2)
+parser.add_argument('--oracle-batch-size', type=int, default=8)
+parser.add_argument('--oracle-model-path', type=str, default='/root/autodl-tmp/FairLLM4Graph/checkpoints/cora/bert-base-uncased/save_model')
 
 args = parser.parse_args()
+args.plm_name = args.plm_path[args.plm_path.rfind('/') + 1:]
  

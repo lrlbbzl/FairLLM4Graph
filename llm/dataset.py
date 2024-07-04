@@ -4,7 +4,7 @@ from torch.utils.data import Dataset, DataLoader, TensorDataset
 NUM_NEG_PER_SAMPLE = 100
 
 class LPDataset(Dataset):
-    def __init__(self, input_ids, attention_mask, pos_edge, neg_edge, features=None):
+    def __init__(self, input_ids, attention_mask, pos_edge, neg_edge, features=None, oracle_edges=None):
         super().__init__()
         self.input_ids = input_ids
         self.attention_mask = attention_mask
@@ -16,10 +16,8 @@ class LPDataset(Dataset):
             src_fea, dst_fea = features[self.all_edge[0, :]], features[self.all_edge[1, :]]
             self.is_heterogeneous = torch.tensor((src_fea != dst_fea), dtype=torch.long).cpu()
 
-            # heter = torch.nonzero(self.is_heterogeneous == 1).squeeze(-1)
-            # homo = torch.nonzero(self.is_heterogeneous == 0).squeeze(-1)
-            # heter = self.labels[heter]
-            # homo = self.labels[homo]
+        if oracle_edges is not None:
+            self.oracle_edges = oracle_edges
             
     def __len__(self):
         return self.all_edge.size(1)
@@ -35,7 +33,12 @@ class LPDataset(Dataset):
         }
         if hasattr(self, 'is_heterogeneous'):
             return_map.update({'is_heterogeneous' : self.is_heterogeneous[idx]})
+        if hasattr(self, 'oracle_edges'):
+            src, dst = self.oracle_edges[0][idx], self.oracle_edges[1][idx]
+            oracle_node_idx = torch.LongTensor([src, dst])
+            return_map.update({'oracle_input_ids' : self.input_ids[oracle_node_idx], 'oracle_attention_mask' : self.attention_mask[oracle_node_idx]})
         return return_map
+    
 
 class EncodeDataset(Dataset):
     def __init__(self, input_ids, attention_mask):

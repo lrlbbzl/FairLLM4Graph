@@ -51,4 +51,11 @@ mp = {
     'neg_edge' : node_idx[neg_idx].transpose(0, 1)
 }
 
+
+train_num = len(pos_idx) + len(neg_idx)
+unselect_idx = list(set(range(len(prob))) - set(idx))
+oracle_edge = np.random.choice(unselect_idx, train_num, replace=False)
+oracle_edge = node_idx[oracle_edge].transpose(0, 1)
+mp.update({'oracle_edge' : oracle_edge})
+print(oracle_edge.shape)
 torch.save(mp, 'filter_data.pt')

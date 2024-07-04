@@ -14,6 +14,7 @@ from sklearn.metrics import precision_recall_fscore_support, accuracy_score
 from typing import Optional, Dict, Callable
 
 from transformers.trainer import EvalPrediction
+from transformers import AutoTokenizer, AutoModel
 
 hidden_size_map = {
     'bert-base-uncased' : 768,
@@ -31,6 +32,28 @@ def lp_compute_metrics(preds: Optional[Callable[[EvalPrediction], Dict]]):
     return {
         'acc': acc, 'f1' : f1
     }
+
+def get_oracle_model(args):
+    if args.plm_name == 'bert-base-uncased':
+        lm = AutoModel.from_pretrained(args.plm_path)
+        tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
+    else:
+        lm = AutoModel.from_pretrained(args.plm_path, device_map='auto')
+        tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
+        tokenizer.pad_token = tokenizer.eos_token
+        tokenizer.padding_side = 'right'
+    if args.use_peft:
+        peft_model = PeftModel.from_pretrained(lm, args.oracle_model_path)
+        model = peft_model.model
+    elif args.use_full:
+        model = AutoModel.from_pretrained(args.oracle_model_path)
+    else:
+        model = lm
+    
+    lp_model = LP_model(args)
+    lp_model.model = model
+    lp_model = lp_model.to('cuda')
+    return lp_model
 
 
 class LinkPredHead(nn.Module):
