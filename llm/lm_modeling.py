@@ -33,13 +33,13 @@ def lp_compute_metrics(preds: Optional[Callable[[EvalPrediction], Dict]]):
         'acc': acc, 'f1' : f1
     }
 
-def load_model(args, type):
-    assert type in ['oracle', 'ref']
+def load_model(args, ty):
+    assert ty in ['oracle', 'ref']
     p = {
         'oracle' : args.oracle_model_path,
         'ref' : args.ref_model_path
     } 
-    path = p[type]
+    path = p[ty]
 
     if args.plm_name == 'bert-base-uncased':
         lm = AutoModel.from_pretrained(args.plm_path)
@@ -49,16 +49,19 @@ def load_model(args, type):
         tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
         tokenizer.pad_token = tokenizer.eos_token
         tokenizer.padding_side = 'right'
+
+    lp_model = LP_model(args)
     if args.use_peft:
         peft_model = PeftModel.from_pretrained(lm, path)
-        model = peft_model.model
+        if ty == 'oracle':
+            lp_model.model = peft_model.model # BertModel
+        elif ty == 'ref':
+            lp_model.model.model = peft_model.model
     elif args.use_full:
-        model = AutoModel.from_pretrained(path)
+        lp_model.model = AutoModel.from_pretrained(path)
     else:
-        model = lm
+        lp_model.model = lm
     
-    lp_model = LP_model(args)
-    lp_model.model = model
     lp_model = lp_model.to('cuda')
     return lp_model
 
@@ -98,7 +101,7 @@ class LP_model(nn.Module):
                                                 torch_dtype=torch.bfloat16,
                                                 device_map='auto')
 
-        if args.mode == 'ft_lm':
+        if args.mode in ['ft_lm', 'po']:
             if args.use_peft:
                 lora_config = LoraConfig(
                     task_type=TaskType.SEQ_CLS,

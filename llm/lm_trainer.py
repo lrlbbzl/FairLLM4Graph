@@ -23,7 +23,7 @@ from config import args
 
 
 if args.add_kl:
-    oracle_model = load_model(args)
+    oracle_model = load_model(args, ty='oracle')
 
 class InnerTrainer(HugTrainer):
     def __init__(self, *args, **kwargs):
@@ -40,16 +40,8 @@ class InnerTrainer(HugTrainer):
             is_heter = inputs.pop('is_heterogeneous')
         pred = model(input_ids, attention_mask)
         pred = pred.squeeze(-1)
-        # weights = torch.where(is_heter == 1, torch.tensor(self.sensitive_weight), torch.tensor(self.non_sensitive_weight))
-        # loss = F.binary_cross_entropy(pred, labels, weights)
         loss = F.binary_cross_entropy(pred, labels,)
-        # if (0 in is_heter) and (1 in is_heter):
-        #     zero, one = torch.nonzero(is_heter == 0).squeeze(-1), torch.nonzero(is_heter == 1).squeeze(-1)
-        #     zero_score, one_score = pred[zero], pred[one]
-        #     self.compute_steps += 1
-        #     if self.compute_steps % 10 == 0:
-        #         print("Homo: {}, Heter: {}".format(torch.mean(zero_score), torch.mean(one_score)))
-        #     loss += self.gamma * ((torch.mean(zero_score) - torch.mean(one_score)) ** 2)
+
         if args.add_kl:
             with torch.no_grad():
                 oracle_input_ids, oracle_attention_mask = inputs.pop('oracle_input_ids'), inputs.pop('oracle_attention_mask')

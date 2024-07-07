@@ -24,7 +24,7 @@ from .lm_modeling import load_model
 from config import args
 
 if args.mode == 'po':
-    ref_model = load_model(args, type='ref')
+    ref_model = load_model(args, ty='ref')
 
 class PoTrainer(HugTrainer):
     def __init__(self, *args, **kwargs):
@@ -46,13 +46,29 @@ class PoTrainer(HugTrainer):
             win_ref = ref_model(heter_input_ids, heter_attention_mask)
             lose_ref = ref_model(homo_input_ids, homo_attention_mask)
 
-        # import pdb; pdb.set_trace()
-        theta_logratio = torch.log(win_pred) - torch.log(lose_pred)
-        ref_logratio = torch.log(win_ref) - torch.log(lose_ref)
+        # # import pdb; pdb.set_trace()
+        # theta_logratio = torch.log(win_pred) - torch.log(lose_pred)
+        # ref_logratio = torch.log(win_ref) - torch.log(lose_ref)
 
-        beta = args.po_beta
+        # beta = args.po_beta
 
-        loss = - F.logsigmoid(beta * (theta_logratio - ref_logratio)).mean()
+        # loss = - F.logsigmoid(beta * (theta_logratio - ref_logratio)).mean()
+
+        # use loss instead of logits
+        labels_heter = torch.tensor([1] * heter_input_ids.size(0), dtype=torch.float)
+        labels_homo = torch.tensor([0] * homo_input_ids.size(0), dtype=torch.float)
+        fc = nn.BCEWithLogitsLoss(reduction='none')
+
+        win_pred_loss = -1 * fc(win_pred, labels_heter.unsqueeze(-1).cuda(),)
+        lose_pred_loss = -1 * fc(lose_pred.squeeze(-1), labels_homo.cuda(),)
+        win_ref_loss = -1 * fc(win_ref.squeeze(-1), labels_heter.cuda(),)
+        lose_ref_loss = -1 * fc(lose_ref.squeeze(-1), labels_homo.cuda(),)
+
+        theta_logratio = win_pred - lose_pred
+        ref_logratio = win_ref - lose_ref
+
+        loss = -F.logsigmoid(args.po_beta * (theta_logratio - ref_logratio)).mean()
+
         if return_outputs:
             pred = {'pred' : win_pred.squeeze(-1) }
         return (loss, pred) if return_outputs else loss

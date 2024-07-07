@@ -95,7 +95,7 @@ def run(args):
             data.x = text_embeddings
 
         elif args.mode == 'ft_lm' and args.filter:
-            args.model_path = osp.join(args.output_dir, osp.join(args.dataset, args.plm_name + '_filter'))
+            args.model_path = '/root/autodl-tmp/FairLLM4Graph/checkpoints/cora/bert-base-uncased_filter_data1_beta0.3'
             if args.use_full:
                 args.model_path = args.model_path + '_full'
                 embeds_path = osp.join(args.model_path, 'text_embeddings.pt'.format(args.use_peft))

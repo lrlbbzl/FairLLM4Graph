@@ -2,10 +2,10 @@ export CUDA_VISIBLE_DEVICES=0
 export CUDA_LAUNCH_BLOCKING=1
 wandb offline
 python main.py --conv-name gcn \
-    --mode gnn \
+    --mode ft_lm \
     --dataset cora \
     --epoch 500 \
-    # --use-peft \
+    --use-peft \
     --lm-epochs 10 \
     --lm-batch-size 32 \
     --sm-batch-size 16 \

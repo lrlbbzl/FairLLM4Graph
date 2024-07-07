@@ -169,7 +169,7 @@ def finetune_lm_on_filtering(args, data, text):
                                 train_edge_idx['pos_edge'],
                                 train_edge_idx['neg_edge'])
     model = LP_model(args)
-
+    # import pdb; pdb.set_trace()
     training_args = TrainingArguments(
         per_device_train_batch_size=args.sm_batch_size,
         gradient_accumulation_steps=args.lm_batch_size // args.sm_batch_size,
