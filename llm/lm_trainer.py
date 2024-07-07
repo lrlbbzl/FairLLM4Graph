@@ -17,13 +17,13 @@ from torchmetrics.functional import retrieval_reciprocal_rank as mrr
 from transformers import EarlyStoppingCallback
 from transformers import Trainer as HugTrainer
 from transformers import TrainingArguments
-from .lm_modeling import get_oracle_model
+from .lm_modeling import load_model
 
 from config import args
 
 
 if args.add_kl:
-    oracle_model = get_oracle_model(args)
+    oracle_model = load_model(args)
 
 class InnerTrainer(HugTrainer):
     def __init__(self, *args, **kwargs):

@@ -24,6 +24,7 @@ from llm.finetune import finetune_lm, merge_modeling, finetune_lm_on_filtering
 from transformers import AutoModel, AutoTokenizer
 from llm.lm_trainer import InnerTrainer
 from llm.lm_modeling import LP_model
+from llm.po import po_lm
 
 from peft import PeftModel
 from utils import prediction_fairness
@@ -81,6 +82,7 @@ def run(args):
                 embeds_path = osp.join(args.model_path, 'text_embeddings.pt'.format(args.use_peft))
             else:
                 embeds_path = osp.join(args.model_path, 'text_embeddings_{}.pt'.format(args.use_peft))
+
             if not osp.exists(args.model_path):
                 os.makedirs(args.model_path)
             if (args.use_peft or args.use_full) and (not any('save_model' in d for d in os.listdir(args.model_path))):
@@ -99,6 +101,7 @@ def run(args):
                 embeds_path = osp.join(args.model_path, 'text_embeddings.pt'.format(args.use_peft))
             else:
                 embeds_path = osp.join(args.model_path, 'text_embeddings_{}.pt'.format(args.use_peft))
+
             if not osp.exists(args.model_path):
                 os.makedirs(args.model_path)
             if (args.use_peft or args.use_full) and (not any('save_model' in d for d in os.listdir(args.model_path))):
@@ -109,8 +112,27 @@ def run(args):
             text_embeddings = torch.load(embeds_path)
             args.in_dim = text_embeddings.size(1)
             data.x = text_embeddings
-        
-        
+
+        elif args.mode == 'po':
+            args.model_path = osp.join(args.output_dir, osp.join(args.dataset, args.plm_name + '_po'))
+            if args.use_full:
+                args.model_path = args.model_path + '_full'
+                embeds_path = osp.join(args.model_path, 'text_embeddings.pt'.format(args.use_peft))
+            else:
+                embeds_path = osp.join(args.model_path, 'text_embeddings_{}.pt'.format(args.use_peft))
+
+            if not osp.exists(args.model_path):
+                os.makedirs(args.model_path)
+            if not any('save_model' in d for d in os.listdir(args.model_path)):
+                po_lm(args, g, text)
+            if not osp.exists(embeds_path):
+                text_embeddings = merge_modeling(args, g, text)
+                torch.save(text_embeddings, embeds_path)
+            text_embeddings = torch.load(embeds_path)
+            args.in_dim = text_embeddings.size(1)
+            data.x = text_embeddings
+            
+
 
         model = GNN(args.in_dim, args.out_dim, args.n_heads, args.n_layers, args.dropout, args.conv_name).to(device)
         optimizer = Adam(model.parameters(), lr=args.lr)

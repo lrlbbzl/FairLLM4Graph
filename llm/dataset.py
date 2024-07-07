@@ -38,6 +38,28 @@ class LPDataset(Dataset):
             oracle_node_idx = torch.LongTensor([src, dst])
             return_map.update({'oracle_input_ids' : self.input_ids[oracle_node_idx], 'oracle_attention_mask' : self.attention_mask[oracle_node_idx]})
         return return_map
+
+
+class PoDataset(Dataset):
+    def __init__(self, input_ids, attention_mask, po_edges):
+        super().__init__()
+        self.input_ids = input_ids
+        self.attention_mask = attention_mask
+        self.po_edges = po_edges
+
+    def __len__(self, ):
+        return self.po_edges.size(1)
+    
+    def __getitem__(self, idx):
+        src, heter, homo = self.po_edges[0][idx], self.po_edges[1][idx], self.po_edges[2][idx]
+        heter_node_idx = torch.LongTensor([src, heter])
+        homo_node_idx = torch.LongTensor([src, homo])
+        return {
+            'heter_input_ids' : self.input_ids[heter_node_idx],
+            'heter_attention_mask' : self.attention_mask[heter_node_idx],
+            'homo_input_ids' : self.input_ids[homo_node_idx],
+            'homo_attention_mask' : self.attention_mask[homo_node_idx],
+        }
     
 
 class EncodeDataset(Dataset):

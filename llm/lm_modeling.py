@@ -33,7 +33,14 @@ def lp_compute_metrics(preds: Optional[Callable[[EvalPrediction], Dict]]):
         'acc': acc, 'f1' : f1
     }
 
-def get_oracle_model(args):
+def load_model(args, type):
+    assert type in ['oracle', 'ref']
+    p = {
+        'oracle' : args.oracle_model_path,
+        'ref' : args.ref_model_path
+    } 
+    path = p[type]
+
     if args.plm_name == 'bert-base-uncased':
         lm = AutoModel.from_pretrained(args.plm_path)
         tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
@@ -43,10 +50,10 @@ def get_oracle_model(args):
         tokenizer.pad_token = tokenizer.eos_token
         tokenizer.padding_side = 'right'
     if args.use_peft:
-        peft_model = PeftModel.from_pretrained(lm, args.oracle_model_path)
+        peft_model = PeftModel.from_pretrained(lm, path)
         model = peft_model.model
     elif args.use_full:
-        model = AutoModel.from_pretrained(args.oracle_model_path)
+        model = AutoModel.from_pretrained(path)
     else:
         model = lm
     

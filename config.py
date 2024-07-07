@@ -17,7 +17,7 @@ parser.add_argument('--dropout', type=float, default=0.2)
 parser.add_argument('--conv-norm', type=bool, default=True)
 parser.add_argument('--conv-name', type=str, default='gcn')
 parser.add_argument('--lr', type=float, default=1e-4)
-parser.add_argument('--mode', type=str, default='ft_lm', choices=['gnn', 'ft_lm'])
+parser.add_argument('--mode', type=str, default='ft_lm', choices=['gnn', 'ft_lm', 'po'])
 parser.add_argument('--output-dir', type=str, default='./checkpoints')
 
 # lm config
@@ -38,12 +38,21 @@ parser.add_argument('--use-full', action='store_true')
 parser.add_argument('--eval-steps', type=int, default=500)
 parser.add_argument('--logging-steps', type=int, default=50)
 
-# idea
+# selective droping 
 parser.add_argument('--filter', action='store_true')
 parser.add_argument('--add-kl', action='store_true')
 parser.add_argument('--oracle-sm-batch-size', type=int, default=2)
 parser.add_argument('--oracle-batch-size', type=int, default=8)
 parser.add_argument('--oracle-model-path', type=str, default='/root/autodl-tmp/FairLLM4Graph/checkpoints/cora/bert-base-uncased/save_model')
+
+# po
+# parser.add_argument('--po', action='store_true')
+parser.add_argument('--ref-model-path', type=str, default='/root/autodl-tmp/FairLLM4Graph/checkpoints/cora/bert-base-uncased_filter_data1_beta0.3/save_model')
+parser.add_argument('--po-sm-batch-size', type=int, default=2, )
+parser.add_argument('--po-batch-size', type=int, default=8)
+parser.add_argument('--po-lr', type=float, default=1e-5)
+parser.add_argument('--po-epoch', type=int, default=2)
+parser.add_argument('--po-beta', type=float, default=0.1)
 
 args = parser.parse_args()
 args.plm_name = args.plm_path[args.plm_path.rfind('/') + 1:]
