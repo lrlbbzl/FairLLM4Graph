@@ -59,15 +59,16 @@ class PoTrainer(HugTrainer):
         labels_homo = torch.tensor([0] * homo_input_ids.size(0), dtype=torch.float)
         fc = nn.BCEWithLogitsLoss(reduction='none')
 
-        win_pred_loss = -1 * fc(win_pred, labels_heter.unsqueeze(-1).cuda(),)
-        lose_pred_loss = -1 * fc(lose_pred.squeeze(-1), labels_homo.cuda(),)
-        win_ref_loss = -1 * fc(win_ref.squeeze(-1), labels_heter.cuda(),)
-        lose_ref_loss = -1 * fc(lose_ref.squeeze(-1), labels_homo.cuda(),)
-
-        theta_logratio = win_pred - lose_pred
-        ref_logratio = win_ref - lose_ref
+        # win_pred_loss = -1 * fc(win_pred, labels_heter.unsqueeze(-1).cuda(),)
+        # lose_pred_loss = -1 * fc(lose_pred.squeeze(-1), labels_homo.cuda(),)
+        # win_ref_loss = -1 * fc(win_ref.squeeze(-1), labels_heter.cuda(),)
+        # lose_ref_loss = -1 * fc(lose_ref.squeeze(-1), labels_homo.cuda(),)
+        theta_logratio = win_pred.log() - lose_pred.log()
+        ref_logratio = win_ref.log() - lose_ref.log()
 
         loss = -F.logsigmoid(args.po_beta * (theta_logratio - ref_logratio)).mean()
+        # _lambda = 10
+        # loss += max(0, )
 
         if return_outputs:
             pred = {'pred' : win_pred.squeeze(-1) }

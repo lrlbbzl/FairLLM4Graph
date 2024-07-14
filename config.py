@@ -27,7 +27,7 @@ parser.add_argument('--pooling', type=str, default='mean', choices=['max', 'mean
 parser.add_argument('--lm-batch-size', type=int, default=8)
 parser.add_argument('--lm-epochs', type=int, default=2)
 parser.add_argument('--sm-batch-size', type=int, default=2)
-parser.add_argument('--infer-batch-size', type=int, default=8)
+parser.add_argument('--infer-batch-size', type=int, default=16)
 parser.add_argument('--ft-lr', type=float, default=1e-5)
 # peft config
 parser.add_argument('--peft-r', type=int, default=8)

@@ -4,9 +4,15 @@ from fairlearn.metrics import (
     equalized_odds_difference,
 )
 import numpy as np
+from tqdm import tqdm
 from itertools import combinations_with_replacement
 from torch import nn
+from transformers import AutoModel, AutoTokenizer
 import torch.nn.functional as F
+from config import logger
+from llm.dataset import LPDataset
+from torch.utils.data import DataLoader, TensorDataset
+from llm.lm_modeling import load_model
 
 class CustomCrossEntropyLoss(nn.Module):
     def __init__(self, sensitive_weight=1.0, non_sensitive_weight=1.0):
@@ -81,3 +87,48 @@ def prediction_fairness(test_edge_idx, test_edge_labels, te_y, group):
     ]
 
     return fair_list
+
+
+
+def generate_results(args, text):
+    t = [b for a, b in text.items()]
+    if args.plm_name == 'bert-base-uncased':
+        tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
+    else:
+        tokenizer = AutoTokenizer.from_pretrained(args.plm_path)
+        tokenizer.pad_token = tokenizer.eos_token
+        tokenizer.padding_side = 'right'
+    inputs = tokenizer(t,
+                    truncation=True, 
+                    add_special_tokens=True,
+                    max_length=256,
+                    padding='max_length',
+                    return_tensors='pt',)
+    pre_data = torch.load('results.pt')
+    true_l, false_l = torch.nonzero(pre_data['labels'] == 1).squeeze(), torch.nonzero(pre_data['labels'] == 0).squeeze()
+    pos_edge, neg_edge = pre_data['node_idx'][true_l].transpose(0, 1), pre_data['node_idx'][false_l].transpose(0, 1)
+    is_heter = torch.cat([pre_data['is_heter'][true_l], pre_data['is_heter'][false_l]])
+    train_dataset = LPDataset(inputs['input_ids'],
+                            inputs['attention_mask'],
+                            pos_edge,
+                            neg_edge)
+    train_dataloader = DataLoader(train_dataset, batch_size=args.infer_batch_size, shuffle=False, num_workers=4)
+    scores, labels, node_idx = [], [], []
+    model = load_model(args, ty='ref')
+
+    with torch.no_grad():
+        for step, data in tqdm(enumerate(train_dataloader)):
+            score = model(data['input_ids'].cuda(), data['attention_mask'].cuda())
+            scores.append(score.squeeze(-1))
+            labels.append(data['label'])
+            node_idx.append(data['node_idx'])
+        scores = torch.cat(scores, dim=0)
+        labels = torch.cat(labels, dim=0)
+        node_idx = torch.cat(node_idx, dim=0)
+        mp = {
+            'scores' : scores,
+            'labels' : labels,
+            'is_heter' : is_heter,
+            'node_idx' : node_idx
+        }
+        torch.save(mp, 'results_ref.pt')

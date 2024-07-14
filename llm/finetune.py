@@ -199,6 +199,7 @@ def finetune_lm_on_filtering(args, data, text):
     lm.save_pretrained(osp.join(args.model_path, 'save_model'))
 
 
+
 def merge_modeling(args, g, text):
     if args.plm_name == 'bert-base-uncased':
         lm = AutoModel.from_pretrained(args.plm_path)
@@ -215,6 +216,7 @@ def merge_modeling(args, g, text):
         model = AutoModel.from_pretrained(osp.join(args.model_path, 'save_model'))
     else:
         model = lm
+
     t = [b for a, b in text.items()]
     inputs = tokenizer(t,
                     truncation=True, 

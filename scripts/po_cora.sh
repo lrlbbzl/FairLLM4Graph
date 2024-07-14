@@ -4,13 +4,14 @@ wandb offline
 python main.py --conv-name gcn \
     --mode po \
     --dataset cora \
-    --po-epoch 0 \
+    --po-epoch 10 \
     --po-sm-batch-size 16 \
     --po-batch-size 16 \
     --logging-steps 10 \
     --eval-steps 200 \
-    --po-lr 1e-5 \
-    --use-peft
+    --po-lr 1e-4 \
+    --use-peft \
+    --epoch 500 \
     # --filter \
     # --add-kl \
     

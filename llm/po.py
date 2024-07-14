@@ -57,6 +57,7 @@ def po_lm(args, data, text):
                         po_edge_idx['po_edge'])
 
     new_model = load_model(args, ty='ref')
+
     training_args = TrainingArguments(
         per_device_train_batch_size=args.po_sm_batch_size,
         gradient_accumulation_steps=args.po_batch_size // args.po_sm_batch_size,
@@ -77,6 +78,6 @@ def po_lm(args, data, text):
         compute_metrics=lp_compute_metrics
     )
 
-    # trainer.train()
+    trainer.train()
     lm = new_model.model
     lm.save_pretrained(osp.join(args.model_path, 'save_model'))

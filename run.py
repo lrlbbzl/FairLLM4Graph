@@ -27,7 +27,7 @@ from llm.lm_modeling import LP_model
 from llm.po import po_lm
 
 from peft import PeftModel
-from utils import prediction_fairness
+from utils import prediction_fairness, generate_results
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -95,6 +95,7 @@ def run(args):
             data.x = text_embeddings
 
         elif args.mode == 'ft_lm' and args.filter:
+            args.model_path = osp.join(args.output_dir, osp.join(args.dataset, args.plm_name + '_filter'))
             args.model_path = '/root/autodl-tmp/FairLLM4Graph/checkpoints/cora/bert-base-uncased_filter_data1_beta0.3'
             if args.use_full:
                 args.model_path = args.model_path + '_full'
@@ -120,7 +121,6 @@ def run(args):
                 embeds_path = osp.join(args.model_path, 'text_embeddings.pt'.format(args.use_peft))
             else:
                 embeds_path = osp.join(args.model_path, 'text_embeddings_{}.pt'.format(args.use_peft))
-
             if not osp.exists(args.model_path):
                 os.makedirs(args.model_path)
             if not any('save_model' in d for d in os.listdir(args.model_path)):

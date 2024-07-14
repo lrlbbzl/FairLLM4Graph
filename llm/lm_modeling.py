@@ -56,7 +56,7 @@ def load_model(args, ty):
         if ty == 'oracle':
             lp_model.model = peft_model.model # BertModel
         elif ty == 'ref':
-            lp_model.model.model = peft_model.model
+            lp_model.model.load_adapter(path, adapter_name='default')
     elif args.use_full:
         lp_model.model = AutoModel.from_pretrained(path)
     else:
