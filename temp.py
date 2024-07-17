@@ -27,7 +27,7 @@ print(len(homo_false_scores), torch.mean(homo_false_scores))
 
 gap = torch.abs(labels - scores)
 prob = (gap - torch.min(gap)) / (torch.max(gap) - torch.min(gap))
-beta = 0.3
+beta = 0.4
 prob = prob + (1 - prob) * beta
 idx = []
 for i, p in enumerate(prob):
@@ -45,7 +45,6 @@ print(len(new_false_homo))
 
 ## prepare data
 pos_idx, neg_idx = [i for i in idx if labels[i] == 1], [i for i in idx if labels[i] == 0]
-
 mp = {
     'pos_edge' : node_idx[pos_idx].transpose(0, 1),
     'neg_edge' : node_idx[neg_idx].transpose(0, 1)
@@ -59,4 +58,4 @@ oracle_edge = node_idx[oracle_edge].transpose(0, 1)
 mp.update({'oracle_edge' : oracle_edge})
 print(oracle_edge.shape)
 import pdb; pdb.set_trace()
-# torch.save(mp, 'filter_data.pt')
+torch.save(mp, 'filter_data.pt')

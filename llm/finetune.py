@@ -153,7 +153,7 @@ def finetune_lm_on_filtering(args, data, text):
                     max_length=256,
                     padding='max_length',
                     return_tensors='pt',)
-    p = osp.join(osp.join(args.input_dir, args.dataset), 'filter_data1_beta0.3.pt')
+    p = osp.join(osp.join(args.input_dir, args.dataset), 'filter_data.pt')
     train_edge_idx = torch.load(p)
 
     if args.add_kl:

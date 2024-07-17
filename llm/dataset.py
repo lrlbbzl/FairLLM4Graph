@@ -51,14 +51,16 @@ class PoDataset(Dataset):
         return self.po_edges.size(1)
     
     def __getitem__(self, idx):
-        src, heter, homo = self.po_edges[0][idx], self.po_edges[1][idx], self.po_edges[2][idx]
-        heter_node_idx = torch.LongTensor([src, heter])
-        homo_node_idx = torch.LongTensor([src, homo])
+        src, pre, aft = self.po_edges[0][idx], self.po_edges[1][idx], self.po_edges[2][idx]
+        types = self.po_edges[3][idx]
+        pre_node_idx = torch.LongTensor([src, pre])
+        pre_node_idx = torch.LongTensor([src, aft])
         return {
-            'heter_input_ids' : self.input_ids[heter_node_idx],
-            'heter_attention_mask' : self.attention_mask[heter_node_idx],
-            'homo_input_ids' : self.input_ids[homo_node_idx],
-            'homo_attention_mask' : self.attention_mask[homo_node_idx],
+            'pre_input_ids' : self.input_ids[pre_node_idx],
+            'pre_attention_mask' : self.attention_mask[pre_node_idx],
+            'aft_input_ids' : self.input_ids[pre_node_idx],
+            'aft_attention_mask' : self.attention_mask[pre_node_idx],
+            'types' : types
         }
     
 

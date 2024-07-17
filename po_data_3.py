@@ -1,10 +1,10 @@
 import torch
 import numpy as np
 
-x = torch.load('./data/cora/filter_data1_beta0.3.pt')
-y = torch.load('results_ref.pt')
+x = torch.load('./data/citeseer/filter_data.pt')
+y = torch.load('./data/citeseer/results_ref.pt')
 
-
+## part1
 mp = {}
 st = set()
 
@@ -40,13 +40,55 @@ for k, v in new_mp.items():
     node1 = heter[0][0]
     homo = sorted(homo_e.items(), key=lambda x : x[1])
     for temp in homo:
-        ans.append([k, node1, temp[0]])
+        ans.append([k, node1, temp[0], 0])
     # node2 = homo[0][0]
     # ans.append([k, node1, node2])
 # import pdb; pdb.set_trace()
+print(len(ans))
+
+
+## part2
+mp = {}
+st = set()
+
+for i in range(len(y['scores'])):
+    score, label, is_heter, node_idx = y['scores'][i], y['labels'][i], y['is_heter'][i], y['node_idx'][i]
+    a, b = node_idx.numpy().tolist()
+    if a not in mp:
+        mp.update({a : dict()})
+        mp[a].update({1 : dict()})
+        mp[a].update({0 : dict()})
+    if not is_heter and label == 0:
+        mp[a][0].update({b : score.cpu().numpy().tolist()})
+    if is_heter and label == 0:
+        mp[a][1].update({b : score.cpu().numpy().tolist()})
+
+nm = 0
+mm = 0
+for k, v in mp.items():
+    if len(v[1]):
+        nm += 1
+    if len(v[0]):
+        mm += 1
+
+new_mp = {}
+for k, v in mp.items():
+    if len(v[0]) > 0 and len(v[1]) > 0:
+        new_mp.update({k : v})
+
+# ans = []
+for k, v in new_mp.items():
+    heter_e, homo_e = v[1], v[0]
+    homo = sorted(homo_e.items(), key=lambda x : x[1], reverse=True)
+    node1 = homo[0][0]
+    heter = sorted(heter_e.items(), key=lambda x : x[1], reverse=True)
+    for temp in heter:
+        ans.append([k, node1, temp[0], 1])
+import pdb; pdb.set_trace()
+print(len(ans))
 res = {'po_edge' : torch.from_numpy(np.array(ans)).transpose(0, 1)} # (3, N)
 torch.save(res, 'po_data.pt')
-print(len(ans))
+print(res['po_edge'].shape)
 # _mp = {}
 # for i in range(len(y['scores'])):
 #     score, label, is_heter, node_idx = y['scores'][i], y['labels'][i], y['is_heter'][i], y['node_idx'][i]

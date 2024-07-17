@@ -43,11 +43,11 @@ parser.add_argument('--filter', action='store_true')
 parser.add_argument('--add-kl', action='store_true')
 parser.add_argument('--oracle-sm-batch-size', type=int, default=2)
 parser.add_argument('--oracle-batch-size', type=int, default=8)
-parser.add_argument('--oracle-model-path', type=str, default='/root/autodl-tmp/FairLLM4Graph/checkpoints/cora/bert-base-uncased/save_model')
+parser.add_argument('--oracle-model-path', type=str, default='/root/autodl-tmp/FairLLM4Graph/checkpoints/citeseer/bert-base-uncased/save_model')
 
 # po
 # parser.add_argument('--po', action='store_true')
-parser.add_argument('--ref-model-path', type=str, default='/root/autodl-tmp/FairLLM4Graph/checkpoints/cora/bert-base-uncased_filter_data1_beta0.3/save_model')
+parser.add_argument('--ref-model-path', type=str, default='/root/autodl-tmp/FairLLM4Graph/checkpoints/citeseer/bert-base-uncased_filter/save_model')
 parser.add_argument('--po-sm-batch-size', type=int, default=2, )
 parser.add_argument('--po-batch-size', type=int, default=8)
 parser.add_argument('--po-lr', type=float, default=1e-5)

@@ -5,12 +5,17 @@ python main.py --conv-name gcn \
     --mode ft_lm \
     --dataset pubmed \
     --epoch 500 \
-    --use-peft \
-    --lm-epochs 5 \
-    --lm-batch-size 48 \
-    --sm-batch-size 48 \
+    --lm-epochs 10 \
+    --lm-batch-size 32 \
+    --sm-batch-size 32 \
+    --oracle-sm-batch-size 32 \
+    --oracle-batch-size 32 \
     --logging-steps 10 \
     --eval-steps 500 \
+    --oracle-model-path '/root/autodl-tmp/FairLLM4Graph/checkpoints/pubmed/bert-base-uncased/save_model' \
+    --ref-model-path '/root/autodl-tmp/FairLLM4Graph/checkpoints/pubmed/bert-base-uncased_filter/save_model' \
     --ft-lr 1e-3 \
-    # --filter
+    --use-peft \
+    # --filter \
+    # --add-kl
     

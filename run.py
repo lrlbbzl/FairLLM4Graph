@@ -79,10 +79,7 @@ def run(args):
             args.model_path = osp.join(args.output_dir, osp.join(args.dataset, args.plm_name))
             if args.use_full:
                 args.model_path = args.model_path + '_full'
-                embeds_path = osp.join(args.model_path, 'text_embeddings.pt'.format(args.use_peft))
-            else:
-                embeds_path = osp.join(args.model_path, 'text_embeddings_{}.pt'.format(args.use_peft))
-
+            embeds_path = osp.join(args.model_path, 'text_embeddings_{}.pt'.format(args.use_peft))
             if not osp.exists(args.model_path):
                 os.makedirs(args.model_path)
             if (args.use_peft or args.use_full) and (not any('save_model' in d for d in os.listdir(args.model_path))):
@@ -96,17 +93,17 @@ def run(args):
 
         elif args.mode == 'ft_lm' and args.filter:
             args.model_path = osp.join(args.output_dir, osp.join(args.dataset, args.plm_name + '_filter'))
-            args.model_path = '/root/autodl-tmp/FairLLM4Graph/checkpoints/cora/bert-base-uncased_filter_data1_beta0.3'
+            # args.model_path = '/root/autodl-tmp/FairLLM4Graph/checkpoints/cora/bert-base-uncased_filter_data1_beta0.3'
             if args.use_full:
                 args.model_path = args.model_path + '_full'
-                embeds_path = osp.join(args.model_path, 'text_embeddings.pt'.format(args.use_peft))
-            else:
-                embeds_path = osp.join(args.model_path, 'text_embeddings_{}.pt'.format(args.use_peft))
+            embeds_path = osp.join(args.model_path, 'text_embeddings_{}.pt'.format(args.use_peft))
 
             if not osp.exists(args.model_path):
                 os.makedirs(args.model_path)
             if (args.use_peft or args.use_full) and (not any('save_model' in d for d in os.listdir(args.model_path))):
                 finetune_lm_on_filtering(args, g, text)
+            if not os.path.exists('results_ref.pt'):
+                generate_results(args, text)
             if not osp.exists(embeds_path):
                 text_embeddings = merge_modeling(args, g, text)
                 torch.save(text_embeddings, embeds_path)
